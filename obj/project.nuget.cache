@@ -1,8 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "DFNid8NZykgFZRwNgi8u1QAat6UzNszFkx31tr0+Q+76ysetLmX4s/CU1wjUdYjaqJf/pphyCuSyAx6JTCBzqw==",
+  "dgSpecHash": "0j0JIbl4KneC1B8F/6idvro1W+eCCwmgPZETGQ7NUFZgGMm9i+4E3f5UhDdIJHThTIgV/mvj8OmGd42o9VoGfg==",
   "success": true,
   "projectFilePath": "C:\\ct-backend\\ct-backend.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\klaud\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\mongodb.bson\\2.14.1\\mongodb.bson.2.14.1.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\mongodb.driver\\2.14.1\\mongodb.driver.2.14.1.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\mongodb.driver.core\\2.14.1\\mongodb.driver.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\mongodb.libmongocrypt\\1.3.0\\mongodb.libmongocrypt.1.3.0.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\sharpcompress\\0.30.1\\sharpcompress.0.30.1.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
