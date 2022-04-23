@@ -12,3 +12,4 @@ global using Caketime.Context;
 global using Caketime.Configuration;
 global using Caketime.Models;
 global using Caketime.Repositories;
+global using Caketime.Services;
