@@ -11,6 +11,7 @@ public interface IRecipeService
     Task<List<Instruction>> GetInstructions();
     Task<List<Recipe>> GetRecipes();
     Task<List<Category>> GetCategories();
+    Task<Category> GetCategoryByName(string name);
 }
 
 public class RecipeService : IRecipeService
@@ -52,6 +53,7 @@ public class RecipeService : IRecipeService
 
     public async Task<List<Category>> GetCategories() => await _categoryRepository.GetCategories();
 
+    public async Task<Category> GetCategoryByName(string name) => await _categoryRepository.GetSneakerByName(name);
     public async Task<Ingredient> AddIngredient(Ingredient newIngredient)
     {
         return await _ingredientRepository.AddIngredient(newIngredient);
@@ -62,7 +64,21 @@ public class RecipeService : IRecipeService
     }
     public async Task<Recipe> AddRecipe(Recipe newRecipe)
     {
-        return await _recipeRepository.AddRecipe(newRecipe);
+        if (newRecipe == null)
+        {
+            throw new ArgumentException();
+        }
+        var category = await GetCategoryByName(newRecipe.Category.Name);
+        if (category == null)
+        {
+            throw new ArgumentException("Category not found!");
+        }
+        else
+        {
+            newRecipe.Category = category;
+            return await _recipeRepository.AddRecipe(newRecipe);
+        }
+
     }
     public async Task<Category> AddCategory(Category newCategory)
     {

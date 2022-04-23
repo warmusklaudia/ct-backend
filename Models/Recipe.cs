@@ -12,7 +12,7 @@ public class Recipe
     public int? Steps { get; set; }
     public string? Difficulty { get; set; }
     public int? QuantityIngredients { get; set; }
-    public List<Ingredient> Ingredients { get; set; }
-    public List<Instruction> Instructions { get; set; }
+    public List<Ingredient>? Ingredients { get; set; }
+    public List<Instruction>? Instructions { get; set; }
     public string? Img { get; set; }
 }
