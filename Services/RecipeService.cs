@@ -12,6 +12,9 @@ public interface IRecipeService
     Task<List<Recipe>> GetRecipes();
     Task<List<Category>> GetCategories();
     Task<Category> GetCategoryByName(string name);
+    Task<Ingredient> GetIngredientByNameAndQuantity(string name, string quantity);
+    Task<Instruction> GetInstructionByNameAndManual(string name, string manual);
+    Task DeleteRecipe(string id);
 }
 
 public class RecipeService : IRecipeService
@@ -47,7 +50,11 @@ public class RecipeService : IRecipeService
 
     public async Task<List<Ingredient>> GetIngredients() => await _ingredientRepository.GetIngredients();
 
+    public async Task<Ingredient> GetIngredientByNameAndQuantity(string name, string quantity) => await _ingredientRepository.GetIngredientByNameAndQuantity(name, quantity);
+
     public async Task<List<Instruction>> GetInstructions() => await _instructionRepository.GetInstructions();
+
+    public async Task<Instruction> GetInstructionByNameAndManual(string name, string manual) => await _instructionRepository.GetInstructionByNameAndManual(name, manual);
 
     public async Task<List<Recipe>> GetRecipes() => await _recipeRepository.GetRecipes();
 
@@ -76,12 +83,39 @@ public class RecipeService : IRecipeService
         else
         {
             newRecipe.Category = category;
+            for (int i = 0; i < newRecipe.Ingredients.Count(); i++)
+            {
+                var ingredient = await GetIngredientByNameAndQuantity(newRecipe.Ingredients[i].Name, newRecipe.Ingredients[i].Quantity);
+                if (ingredient == null)
+                {
+                    var newIngredient = await AddIngredient(new Ingredient() { Name = newRecipe.Ingredients[i].Name, Quantity = newRecipe.Ingredients[i].Quantity });
+                    newRecipe.Ingredients[i] = newIngredient;
+                }
+                else
+                {
+                    newRecipe.Ingredients[i] = ingredient;
+                }
+            }
+            for (int i = 0; i < newRecipe.Instructions.Count(); i++)
+            {
+                var instruction = await GetInstructionByNameAndManual(newRecipe.Instructions[i].Name, newRecipe.Instructions[i].Manual);
+                if (instruction == null)
+                {
+                    var newInstruction = await AddInstrucion(new Instruction() { Name = newRecipe.Instructions[i].Name, Manual = newRecipe.Instructions[i].Manual });
+                    newRecipe.Instructions[i] = newInstruction;
+                }
+                else
+                {
+                    newRecipe.Instructions[i] = instruction;
+                }
+            }
             return await _recipeRepository.AddRecipe(newRecipe);
         }
-
     }
     public async Task<Category> AddCategory(Category newCategory)
     {
         return await _categoryRepository.AddCategory(newCategory);
     }
+
+    public async Task DeleteRecipe(string id) => await _recipeRepository.DeleteRecipe(id);
 }

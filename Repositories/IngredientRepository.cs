@@ -5,6 +5,7 @@ public interface IIngredientRepository
     Task<Ingredient> AddIngredient(Ingredient newIngredient);
     Task<List<Ingredient>> AddIngredients(List<Ingredient> newIngredients);
     Task<List<Ingredient>> GetIngredients();
+    Task<Ingredient> GetIngredientByNameAndQuantity(string name, string quantity);
 }
 
 public class IngredientRepository : IIngredientRepository
@@ -17,6 +18,8 @@ public class IngredientRepository : IIngredientRepository
     }
 
     public async Task<List<Ingredient>> GetIngredients() => await _context.IngredientCollection.Find(_ => true).ToListAsync();
+
+    public async Task<Ingredient> GetIngredientByNameAndQuantity(string name, string quantity) => await _context.IngredientCollection.Find<Ingredient>(i => i.Name == name && i.Quantity == quantity).FirstOrDefaultAsync();
     public async Task<List<Ingredient>> AddIngredients(List<Ingredient> newIngredients)
     {
         await _context.IngredientCollection.InsertManyAsync(newIngredients);

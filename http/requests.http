@@ -1,12 +1,25 @@
+# LOGIN #
+
+POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCIn_nqu-vB-rXLH0RCj4EaH5boCl4N-OU HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "test@howest.be",
+    "password": "test123",
+    "returnSecureToken": true
+}
+
+### 
+
+
 # GET #
 GET http://localhost:3000/recipes HTTP/1.1
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MDg4NzI2OCwidXNlcl9pZCI6InRrOXUzeXNzaThjU0d6a2V3bnpkZnl4RkNMZDIiLCJzdWIiOiJ0azl1M3lzc2k4Y1NHemtld256ZGZ5eEZDTGQyIiwiaWF0IjoxNjUwODg3MjY4LCJleHAiOjE2NTA4OTA4NjgsImVtYWlsIjoidGVzdEBob3dlc3QuYmUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGVzdEBob3dlc3QuYmUiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.bmAGwwi6vpNXwg2m4O_xmMwsKYWHGIZOUzK74ngFFayPq0PGBBTVXldnhePU9Q4jJUc67pCsUsGV0A9CcS4PXWqAPKukXul4ClN3GcEGLDilxT_PhzLo2YUhzEINUycIjBtJk7Q8hvSeSvKKt96gMWjIbLRYip7WPB_yR6RIJSzcQdQiqJhIHD3PAxjQSC8nqv-oK5wR3_dzey_YYO9yDQYzscm3tPh18OJrZ3mo2BEg8jwTMkH2Cnea5YdB_n3tebCquCiQV55TV1-HYwZg3xM_d3PETwmAll_qrb52KLo5fO3g-dmDQJvLY420lc1OL7SkFamkt2GGQ4SUTCOaBg
 
 ###
 
 GET http://localhost:3000/categories HTTP/1.1
 Content-Type: application/json
-
 ###
 
 GET http://localhost:3000/categories/Others HTTP/1.1
@@ -19,7 +32,17 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:3000/ingredients/Flour/120g
+Content-Type: application/json
+
+###
+
 GET http://localhost:3000/instructions HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/instructions/Step%201/Put%20flour%20in%20the%20bowl
 Content-Type: application/json
 
 ###
@@ -33,7 +56,31 @@ Content-Type: application/json
     "Name": "Apple",
     "Category": {
         "Name": "Cakes"
-    }
+    },
+    "Ingredients": [
+        {
+            "Name": "Something",
+            "Quantity": "1 kg"
+        },
+        {
+            "Name": "Flour",
+            "Quantity": "120g"
+        },
+        {
+            "Name": "Baking powder",
+            "Quantity": "1 tsp"
+        }
+    ],
+    "Instructions": [
+        {
+            "Name": "Step 1",
+            "Manual": "Put flour in the bowl"
+        },
+        {
+            "Name": "Step 2",
+            "Manual": "Mix it together with something"
+        }
+    ]
 }
 
 ###
@@ -45,3 +92,14 @@ Content-Type: application/json
     "Name": "Others",
     "Url": "https://caketime.blob.core.windows.net/categories/Others.png"
 }
+
+###
+
+# PUT #
+
+# DELETE #
+
+DELETE http://localhost:3000/recipes/62640c83267b644aa617256 HTTP/1.1
+Content-Type: application/json
+
+###
