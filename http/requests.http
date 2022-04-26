@@ -4,17 +4,28 @@ POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=A
 Content-Type: application/json
 
 {
-    "email": "test@howest.be",
+    "email": "test@test.com",
     "password": "test123",
     "returnSecureToken": true
+}
+
+###
+
+# GET USER DATA
+
+POST https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCIn_nqu-vB-rXLH0RCj4EaH5boCl4N-OU HTTP/1.1
+Content-Type: application/json
+
+{
+    "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MDk3NDI3OCwidXNlcl9pZCI6IllkOTFKN1VLdU1aMzlLcG1vb0lXZmVTNkxPcDIiLCJzdWIiOiJZZDkxSjdVS3VNWjM5S3Btb29JV2ZlUzZMT3AyIiwiaWF0IjoxNjUwOTc0Mjc4LCJleHAiOjE2NTA5Nzc4NzgsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.QG3p3_UG-fnWYHtQQv23_tQqGBZJavhoTIysfK_-KrY2MXmeOEvVQ4S8XHLiepksjw-FSSRviZ9tielMSZTde8MDvpIfkA3RCC3q4nNTSb2cwAQMj-Nnm8XZJhJACFvveRJi_1eJ2wNw-RQnHrsSHuERBzO8MvnNybIbJFw8sMudc3kgGhxxPr2dksCdvWop0HsoPnM4NhXu47fJ_NY0F_25SatDIJVOxWMlV-ESaYMKcoTkRBb8CDUuBrDEiokzOlbXKlu8j-2zOObeRofQnga_-Cy37mg91JNYmPm5ngvKMxo59Ie6J-D-l66bf_HK64GHWrLTtshruCQ5go0BhQ"
 }
 
 ### 
 
 
 # GET #
-GET http://localhost:3000/recipes HTTP/1.1
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MDg4NzI2OCwidXNlcl9pZCI6InRrOXUzeXNzaThjU0d6a2V3bnpkZnl4RkNMZDIiLCJzdWIiOiJ0azl1M3lzc2k4Y1NHemtld256ZGZ5eEZDTGQyIiwiaWF0IjoxNjUwODg3MjY4LCJleHAiOjE2NTA4OTA4NjgsImVtYWlsIjoidGVzdEBob3dlc3QuYmUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsidGVzdEBob3dlc3QuYmUiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.bmAGwwi6vpNXwg2m4O_xmMwsKYWHGIZOUzK74ngFFayPq0PGBBTVXldnhePU9Q4jJUc67pCsUsGV0A9CcS4PXWqAPKukXul4ClN3GcEGLDilxT_PhzLo2YUhzEINUycIjBtJk7Q8hvSeSvKKt96gMWjIbLRYip7WPB_yR6RIJSzcQdQiqJhIHD3PAxjQSC8nqv-oK5wR3_dzey_YYO9yDQYzscm3tPh18OJrZ3mo2BEg8jwTMkH2Cnea5YdB_n3tebCquCiQV55TV1-HYwZg3xM_d3PETwmAll_qrb52KLo5fO3g-dmDQJvLY420lc1OL7SkFamkt2GGQ4SUTCOaBg
+GET http://localhost:3000/recipes/all HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MDk4MzAzMCwidXNlcl9pZCI6IllkOTFKN1VLdU1aMzlLcG1vb0lXZmVTNkxPcDIiLCJzdWIiOiJZZDkxSjdVS3VNWjM5S3Btb29JV2ZlUzZMT3AyIiwiaWF0IjoxNjUwOTgzMDMwLCJleHAiOjE2NTA5ODY2MzAsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.D2bLtrkWqmpIiZ2C5lYVP64POQQ_vI9eYaKpMOWyXNLrL8XFV0JuT__98eyC2oS6rSFC6b9ihYUxOBolE8FHxIoaMou56zShjEQogIjxPyT8A2Q7FdQGE3pWfDRMayEJ1-R1eWbx3Eq_bthfz-bZLFtyBJGwdS86nJaPhYfJ0PLuIN96dJW6SUtEYi2ekYAiQUEnPD-YEQmL6Q-4_PR9fLZ5nhKe_5jTK2VeawL_SCJppjg5nLb0s_AdTkpfeSptoEq4u3x_WigGTJd0xv33fqtvT4-vXqu-A3UWveBsHeLocdJzZcLRZRfMKcOOKgfBESDHRkT8Zb62tIRp6ChWzg
 
 ###
 
@@ -47,9 +58,59 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:3000/recipes/all/Yd91J7UKuMZ39KpmooIWfeS6LOp2
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MDk4MjQwMywidXNlcl9pZCI6IllkOTFKN1VLdU1aMzlLcG1vb0lXZmVTNkxPcDIiLCJzdWIiOiJZZDkxSjdVS3VNWjM5S3Btb29JV2ZlUzZMT3AyIiwiaWF0IjoxNjUwOTgyNDAzLCJleHAiOjE2NTA5ODYwMDMsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.eDy8RbglIs1JMgh9elwo3nbKPT1IPsA8oZPTAjWYn6NISIAfgc0wGdbXg_zvES2yEE4tS2_CcQMQwiVEv4o6F6ONu7zn_GFRd7l1svRiAdtRiv4d4CIJxKLUruyF_DxtZTUg7SOluWGp5oUMn70P3_4HhQG24L0E0vAzhHXri83P1fC9zcqwIXj0XyuHGajOPYmU-hrAzJ0qFhr6DQhCyes7ldh_-FYQXoQQQLMel3n5Ww7Jlz2_lRYYICWBjMXBRrnxGWidEWACmo_lX2xDCeehptcFQiaAqlONRcqO7DdAWxkKnMEK42s8p3cwSLTBBmog9Q8E6d6h4RisjgQpTw
+
+###
+
+Get http://localhost:3000/recipes/favorites/Yjnl8WpMVEa0izqeluQ2Etclmr23
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MDk4NjY2MCwidXNlcl9pZCI6IllkOTFKN1VLdU1aMzlLcG1vb0lXZmVTNkxPcDIiLCJzdWIiOiJZZDkxSjdVS3VNWjM5S3Btb29JV2ZlUzZMT3AyIiwiaWF0IjoxNjUwOTg2NjYwLCJleHAiOjE2NTA5OTAyNjAsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.BaARaT3bIJn7fM3QV52nJauH_HXFR_R4S1uOHOFYFSOeTmmzXdD5wAexCYwNxSW7b0OE6FWUqIATc2IN0rVsgTQR1HsvIjG4TrB6Q2Vz1wxj7r8HjGlJrVXvv6rISayfsubTALK6kdrqw7AXxDPeijcTy5t8x5sBOZq3h4t_nqK-O8exkRO7aN4E4i0ZqvALiyvswp4BvmOPD_1n32LSYx9UleIizEqaREmHq4snmJVMdcfE_3Cb3ijmTJ4Q_qNKtDnst9kNko5Hcrr1iG-8KFkkd5SyAhWiWGr4HQCHDdd0mFbxmx0K7PJp3mrh2_CFgSqGdD8M10g5_v_ry6Rogw
+
+###
+
 # POST #
 
-POST http://localhost:3000/recipes HTTP/1.1
+POST http://localhost:3000/recipes/all HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MDk3ODMyMSwidXNlcl9pZCI6IllkOTFKN1VLdU1aMzlLcG1vb0lXZmVTNkxPcDIiLCJzdWIiOiJZZDkxSjdVS3VNWjM5S3Btb29JV2ZlUzZMT3AyIiwiaWF0IjoxNjUwOTc4MzIxLCJleHAiOjE2NTA5ODE5MjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.SUljNRhBp-8jiwMC6Cg2mIyFgrZBYiIss4EeOAsumvbkdJfITWvUJOCwt6P3PnEgg31HdmddI6UgsOOBJvz8Oh3FUctnYbatFCeYf2UtHwaSPJQvQmNz2GD2JKADRq8p08WCJ7w_MgvCHhIRG0G0988bZ2JVYEITjUYClf_7UaFd1nQRQjLQnWxiYV96cYixlPflTVtAEzGrYKk7e_WkMOkKIVfPJEA-yZkxDBRUUBFN21ENTCynbnGmIIq7cJFjAeBiR89_aZSNg-2cikjrG7YDjWIouuuR9MW2H-ymdSL-Z-8s8-vFz0-gIa-KVbVSMQqKmLyqJl-Lh8WypsIjkg
+
+{
+    "Name": "Apple",
+    "Category": {
+        "Name": "Cakes"
+    },
+    "uidOwner": 
+        "Yd91J7UKuMZ39KpmooIWfeS6LOp2",
+    "uidFavorites": ["Yjnl8WpMVEa0izqeluQ2Etclmr23"],
+    "Ingredients": [
+        {
+            "Name": "Something",
+            "Quantity": "1 kg"
+        },
+        {
+            "Name": "Flour",
+            "Quantity": "120g"
+        },
+        {
+            "Name": "Baking powder",
+            "Quantity": "1 tsp"
+        }
+    ],
+    "Instructions": [
+        {
+            "Name": "Step 1",
+            "Manual": "Put flour in the bowl"
+        },
+        {
+            "Name": "Step 2",
+            "Manual": "Mix it together with something"
+        }
+    ]
+}
+
+###
+
+POST http://localhost:3000/recipes/myrecipes/test@howest.be HTTP/1.1
 Content-Type: application/json
 
 {
