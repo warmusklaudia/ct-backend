@@ -15,6 +15,9 @@ public interface IRecipeService
     Task<Ingredient> GetIngredientByNameAndQuantity(string name, string quantity);
     Task<Instruction> GetInstructionByNameAndManual(string name, string manual);
     Task DeleteRecipe(string id);
+
+    Task<List<Recipe>> GetRecipesByOwner(string uid);
+    Task<List<Recipe>> GetUsersFavoriteRecipes(string uid);
 }
 
 public class RecipeService : IRecipeService
@@ -57,6 +60,9 @@ public class RecipeService : IRecipeService
     public async Task<Instruction> GetInstructionByNameAndManual(string name, string manual) => await _instructionRepository.GetInstructionByNameAndManual(name, manual);
 
     public async Task<List<Recipe>> GetRecipes() => await _recipeRepository.GetRecipes();
+
+    public async Task<List<Recipe>> GetRecipesByOwner(string uid) => await _recipeRepository.GetRecipesByOwner(uid);
+    public async Task<List<Recipe>> GetUsersFavoriteRecipes(string uid) => await _recipeRepository.GetUsersFavoriteRecipes(uid);
 
     public async Task<List<Category>> GetCategories() => await _categoryRepository.GetCategories();
 

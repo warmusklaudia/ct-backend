@@ -11,6 +11,11 @@ builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 //Services
 builder.Services.AddTransient<IRecipeService, RecipeService>();
 
+//GraphQL
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<Query>()
+    .ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
 
 
 //Authentication
@@ -36,7 +41,8 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(opt =>
 
 
 var app = builder.Build();
-
+app.MapGraphQL();
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -130,11 +136,40 @@ app.MapGet("/instructions/{name}/{manual}", async (IRecipeService recipeService,
     }
 });
 
-app.MapGet("/recipes", [Authorize] async (IRecipeService recipeService) =>
+app.MapGet("/recipes/all", [Authorize] async (IRecipeService recipeService, ClaimsPrincipal user) =>
 {
     try
     {
+        var email = user.FindFirstValue(ClaimTypes.Email);
         var results = await recipeService.GetRecipes();
+        return Results.Ok(results);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapGet("/recipes/all/{uid}", [Authorize] async (IRecipeService recipeService, string uid) =>
+{
+    try
+    {
+        var results = await recipeService.GetRecipesByOwner(uid);
+        return Results.Ok(results);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapGet("/recipes/favorites/{uid}", [Authorize] async (IRecipeService recipeService, string uid) =>
+{
+    try
+    {
+        var results = await recipeService.GetUsersFavoriteRecipes(uid);
         return Results.Ok(results);
     }
     catch (Exception ex)
@@ -159,7 +194,7 @@ app.MapPost("/categories", async (IRecipeService recipeService, Category categor
     }
 });
 
-app.MapPost("/recipes", [Authorize] async (IRecipeService recipeService, Recipe recipe) =>
+app.MapPost("/recipes/all", [Authorize] async (IRecipeService recipeService, Recipe recipe) =>
 {
     try
     {
@@ -172,6 +207,7 @@ app.MapPost("/recipes", [Authorize] async (IRecipeService recipeService, Recipe 
         throw;
     }
 });
+
 
 // PUT
 
