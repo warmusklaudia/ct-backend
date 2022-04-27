@@ -13,6 +13,8 @@ global using System.Security.Claims;
 global using Microsoft.AspNetCore.Authorization;
 global using FirebaseAdmin;
 global using FirebaseAdmin.Auth;
+global using Azure.Storage.Blobs;
+global using Azure.Storage.Blobs.Models;
 
 //CUSTOMER
 global using Caketime.Context;

@@ -18,6 +18,9 @@ public interface IRecipeService
 
     Task<List<Recipe>> GetRecipesByOwner(string uid);
     Task<List<Recipe>> GetUsersFavoriteRecipes(string uid);
+    Task<Recipe> GetRecipeById(string id);
+    // Task<Recipe> UpdateFavorite(string recipeid, string uid);
+    Task<Recipe> UpdatePhoto(string recipeId, string uri);
 }
 
 public class RecipeService : IRecipeService
@@ -61,12 +64,14 @@ public class RecipeService : IRecipeService
 
     public async Task<List<Recipe>> GetRecipes() => await _recipeRepository.GetRecipes();
 
+    public async Task<Recipe> GetRecipeById(string id) => await _recipeRepository.GetRecipeById(id);
+
     public async Task<List<Recipe>> GetRecipesByOwner(string uid) => await _recipeRepository.GetRecipesByOwner(uid);
     public async Task<List<Recipe>> GetUsersFavoriteRecipes(string uid) => await _recipeRepository.GetUsersFavoriteRecipes(uid);
 
     public async Task<List<Category>> GetCategories() => await _categoryRepository.GetCategories();
 
-    public async Task<Category> GetCategoryByName(string name) => await _categoryRepository.GetSneakerByName(name);
+    public async Task<Category> GetCategoryByName(string name) => await _categoryRepository.GetCategoryByName(name);
     public async Task<Ingredient> AddIngredient(Ingredient newIngredient)
     {
         return await _ingredientRepository.AddIngredient(newIngredient);
@@ -122,6 +127,10 @@ public class RecipeService : IRecipeService
     {
         return await _categoryRepository.AddCategory(newCategory);
     }
+
+    public async Task<Recipe> UpdatePhoto(string recipeId, string uri) => await _recipeRepository.UpdatePhoto(recipeId, uri);
+
+    // public async Task<Recipe> UpdateFavorite(string recipeid, string uid) => await _recipeRepository.UpdateFavorite(recipeid, uid);
 
     public async Task DeleteRecipe(string id) => await _recipeRepository.DeleteRecipe(id);
 }

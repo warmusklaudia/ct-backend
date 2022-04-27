@@ -1,8 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
+//Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 //Mongo
 var mongoSettings = builder.Configuration.GetSection("MongoConnection");
 builder.Services.Configure<DatabaseSettings>(mongoSettings);
 builder.Services.AddTransient<IMongoContext, MongoContext>();
+//Blob
+var blobSettings = builder.Configuration.GetSection("Blob");
+builder.Services.Configure<BlobSettings>(blobSettings);
+builder.Services.AddTransient<IBlobService, BlobService>();
 //Repositories
 builder.Services.AddTransient<IIngredientRepository, IngredientRepository>();
 builder.Services.AddTransient<IInstructionRepository, InstructionRepository>();
@@ -10,6 +17,8 @@ builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 //Services
 builder.Services.AddTransient<IRecipeService, RecipeService>();
+
+
 
 //GraphQL
 builder.Services
@@ -41,11 +50,15 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(opt =>
 
 
 var app = builder.Build();
+//Swagger
+app.MapSwagger();
+app.UseSwaggerUI();
+//GraphQL
 app.MapGraphQL();
+//Auth
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 
 //GET
@@ -136,11 +149,25 @@ app.MapGet("/instructions/{name}/{manual}", async (IRecipeService recipeService,
     }
 });
 
+app.MapGet("/recipes/recipe/{recipeid}", async (IRecipeService recipeService, string recipeid) =>
+{
+    try
+    {
+        var results = await recipeService.GetRecipeById(recipeid);
+        return Results.Ok(results);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
 app.MapGet("/recipes/all", [Authorize] async (IRecipeService recipeService, ClaimsPrincipal user) =>
 {
     try
     {
-        var email = user.FindFirstValue(ClaimTypes.Email);
+        // var email = user.FindFirstValue(ClaimTypes.Email);
         var results = await recipeService.GetRecipes();
         return Results.Ok(results);
     }
@@ -210,6 +237,38 @@ app.MapPost("/recipes/all", [Authorize] async (IRecipeService recipeService, Rec
 
 
 // PUT
+
+app.MapPut("/recipes/recipe/upload/{recipeid}", [Authorize] async (IRecipeService recipeService, IBlobService blobService, string recipeId) =>
+{
+    try
+    {
+        var endpoint = "https://caketime.blob.core.windows.net/recipes/";
+        var createBlob = blobService.CreateBlob($"{recipeId}.jpg", "./assets/CarrotMuffins.jpg");
+        var result = await recipeService.UpdatePhoto(recipeId, $"{endpoint}{recipeId}.jpg");
+        return Results.Ok(result);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+
+// app.MapPut("/recipes/recipe/{recipeid}", [Authorize] async (IRecipeService recipeService, string recipeid, ClaimsPrincipal user) =>
+// {
+//     try
+//     {
+//         var uid = user.FindFirstValue(ClaimTypes.UserData);
+//         var result = await recipeService.UpdateFavorite(recipeid, uid);
+//         return Results.Ok(uid);
+//     }
+//     catch (Exception ex)
+//     {
+//         Console.WriteLine(ex);
+//         throw;
+//     }
+// });
 
 // DELETE 
 
