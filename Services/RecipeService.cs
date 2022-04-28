@@ -29,6 +29,8 @@ public interface IRecipeService
     Task<User> ToggleFavorite(string userUid, Recipe recipe);
     Task<User> AddMyRecipe(string userUid, Recipe recipe);
     Task<User> DeleteMyRecipe(string userUid, Recipe recipe);
+    Task<Category> GetCategoryById(string id);
+    Task<Category> UpdateCategory(string id, string name);
 }
 
 public class RecipeService : IRecipeService
@@ -81,6 +83,9 @@ public class RecipeService : IRecipeService
     public async Task<List<Category>> GetCategories() => await _categoryRepository.GetCategories();
 
     public async Task<Category> GetCategoryByName(string name) => await _categoryRepository.GetCategoryByName(name);
+    public async Task<Category> GetCategoryById(string id) => await _categoryRepository.GetCategoryById(id);
+
+    public async Task<Category> UpdateCategory(string id, string name) => await _categoryRepository.UpdateCategory(id, name);
     public async Task<Ingredient> AddIngredient(Ingredient newIngredient)
     {
         return await _ingredientRepository.AddIngredient(newIngredient);

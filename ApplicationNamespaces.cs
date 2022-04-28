@@ -25,4 +25,5 @@ global using Caketime.Models;
 global using Caketime.Repositories;
 global using Caketime.Services;
 global using Caketime.GraphQL.Queries;
+global using Caketime.GraphQL.Mutations;
 global using Caketime.Validators;

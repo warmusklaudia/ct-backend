@@ -27,8 +27,9 @@ builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyCont
 //GraphQL
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>()
-    .ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
+    .AddQueryType<Queries>()
+    .ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true)
+    .AddMutationType<Mutations>();
 
 
 //Authentication
@@ -168,11 +169,10 @@ app.MapGet("/recipes/recipe/{recipeid}", async (IRecipeService recipeService, st
     }
 });
 
-app.MapGet("/recipes/all", [Authorize] async (IRecipeService recipeService, ClaimsPrincipal user) =>
+app.MapGet("/recipes/all", [Authorize] async (IRecipeService recipeService) =>
 {
     try
     {
-        // var email = user.FindFirstValue(ClaimTypes.Email);
         var results = await recipeService.GetRecipes();
         return Results.Ok(results);
     }

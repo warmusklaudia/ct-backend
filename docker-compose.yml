@@ -11,6 +11,7 @@ services:
       - 3000:3000
     volumes:
       - './appsettings.Docker.json:/app/appsettings.json'
+      - './auth/service-account.json:/app/auth/service-account.json'
 
   mongo:
     hostname: mongo
