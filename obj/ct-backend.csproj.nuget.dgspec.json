@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[2.3.0, )"
             },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[10.4.0, )"
+            },
             "HotChocolate.AspNetCore": {
               "target": "Package",
               "version": "[12.6.0, )"

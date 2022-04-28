@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ozjl9h455zonvvloMT1tmxjJhFqzwiMMRowDfFFXVyxgVuV4ArZpCdoTN6mm1f8ga+e5WIDQSXMyYcW8+TSxcw==",
+  "dgSpecHash": "bh2o2IFnh0ht8bVppnRuLAgjEZicyYMgWDIDplM3FHpPsO8KHfOmJMkAuFLgo9NFOSzYugrAIWQk4F5bu0+Ptw==",
   "success": true,
   "projectFilePath": "C:\\ct-backend\\ct-backend.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,9 @@
     "C:\\Users\\klaud\\.nuget\\packages\\azure.storage.common\\12.10.0\\azure.storage.common.12.10.0.nupkg.sha512",
     "C:\\Users\\klaud\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\klaud\\.nuget\\packages\\firebaseadmin\\2.3.0\\firebaseadmin.2.3.0.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.4.0\\fluentvalidation.aspnetcore.10.4.0.nupkg.sha512",
+    "C:\\Users\\klaud\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.4.0\\fluentvalidation.dependencyinjectionextensions.10.4.0.nupkg.sha512",
     "C:\\Users\\klaud\\.nuget\\packages\\google.api.gax\\3.2.0\\google.api.gax.3.2.0.nupkg.sha512",
     "C:\\Users\\klaud\\.nuget\\packages\\google.api.gax.rest\\3.2.0\\google.api.gax.rest.3.2.0.nupkg.sha512",
     "C:\\Users\\klaud\\.nuget\\packages\\google.apis\\1.49.0\\google.apis.1.49.0.nupkg.sha512",

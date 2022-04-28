@@ -84,3 +84,6 @@ C:\ct-backend\bin\Debug\net6.0\Azure.Storage.Blobs.dll
 C:\ct-backend\bin\Debug\net6.0\Azure.Storage.Common.dll
 C:\ct-backend\bin\Debug\net6.0\System.IO.Hashing.dll
 C:\ct-backend\bin\Debug\net6.0\System.Memory.Data.dll
+C:\ct-backend\bin\Debug\net6.0\FluentValidation.dll
+C:\ct-backend\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\ct-backend\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

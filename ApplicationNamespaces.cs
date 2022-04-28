@@ -15,6 +15,8 @@ global using FirebaseAdmin;
 global using FirebaseAdmin.Auth;
 global using Azure.Storage.Blobs;
 global using Azure.Storage.Blobs.Models;
+global using FluentValidation;
+global using FluentValidation.AspNetCore;
 
 //CUSTOMER
 global using Caketime.Context;
@@ -23,3 +25,4 @@ global using Caketime.Models;
 global using Caketime.Repositories;
 global using Caketime.Services;
 global using Caketime.GraphQL.Queries;
+global using Caketime.Validators;

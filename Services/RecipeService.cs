@@ -17,7 +17,6 @@ public interface IRecipeService
     Task DeleteRecipe(string id);
 
     Task<List<Recipe>> GetRecipesByOwner(string uid);
-    Task<List<Recipe>> GetUsersFavoriteRecipes(string uid);
     Task<Recipe> GetRecipeById(string id);
     // Task<Recipe> UpdateFavorite(string recipeid, string uid);
     Task<Recipe> UpdatePhoto(string recipeId, string uri);
@@ -78,7 +77,6 @@ public class RecipeService : IRecipeService
     public async Task<Recipe> GetRecipeById(string id) => await _recipeRepository.GetRecipeById(id);
 
     public async Task<List<Recipe>> GetRecipesByOwner(string uid) => await _recipeRepository.GetRecipesByOwner(uid);
-    public async Task<List<Recipe>> GetUsersFavoriteRecipes(string uid) => await _recipeRepository.GetUsersFavoriteRecipes(uid);
 
     public async Task<List<Category>> GetCategories() => await _categoryRepository.GetCategories();
 

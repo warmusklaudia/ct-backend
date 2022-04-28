@@ -18,7 +18,10 @@ builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 //Services
 builder.Services.AddTransient<IRecipeService, RecipeService>();
-
+//Validation
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<RecipeValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryValidator>());
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserValidator>());
 
 
 //GraphQL
@@ -194,19 +197,6 @@ app.MapGet("/recipes/all/{uid}", [Authorize] async (IRecipeService recipeService
     }
 });
 
-app.MapGet("/recipes/favorites/{uid}", [Authorize] async (IRecipeService recipeService, string uid) =>
-{
-    try
-    {
-        var results = await recipeService.GetUsersFavoriteRecipes(uid);
-        return Results.Ok(results);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex);
-        throw;
-    }
-});
 
 app.MapGet("/users", async (IRecipeService recipeService) =>
 {
@@ -222,54 +212,98 @@ app.MapGet("/users", async (IRecipeService recipeService) =>
     }
 });
 
+app.MapGet("/users/{uid}", async (IRecipeService recipeService, string uid) =>
+{
+    try
+    {
+        var results = await recipeService.GetUserByUID(uid);
+        return Results.Ok(results);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
 
 // POST
 
-app.MapPost("/categories", async (IRecipeService recipeService, Category category) =>
+app.MapPost("/categories", [Authorize] async (IValidator<Category> validator, IRecipeService recipeService, Category category) =>
 {
     try
     {
-        var result = await recipeService.AddCategory(category);
-        return Results.Created($"/categories/{result.Id}", result);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex);
-        throw;
-    }
-});
-
-app.MapPost("/recipes/all", [Authorize] async (IRecipeService recipeService, Recipe recipe) =>
-{
-    try
-    {
-        var result = await recipeService.AddRecipe(recipe);
-        return Results.Created($"/recipes/{result.RecipeId}", result);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex);
-        throw;
-    }
-});
-
-app.MapPost("/signup", async (IRecipeService recipeService, User user) =>
-{
-    try
-    {
-        UserRecordArgs args = new()
+        var validationResult = validator.Validate(category);
+        if (validationResult.IsValid)
         {
-            Email = user.Email,
-            EmailVerified = false,
-            Password = user.Password,
-            DisplayName = user.DisplayName,
-            Disabled = false,
-        };
+            var result = await recipeService.AddCategory(category);
+            return Results.Created($"/categories/{result.Id}", result);
+        }
+        else
+        {
+            var errors = validationResult.Errors.Select(x => new { errors = x.ErrorMessage });
+            return Results.BadRequest(errors);
+        }
 
-        var createdUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(args);
-        var uid = createdUser.Uid;
-        user.UID = uid;
-        var result = await recipeService.AddUser(user);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapPost("/recipes/all", [Authorize] async (IValidator<Recipe> validator, IRecipeService recipeService, Recipe recipe) =>
+{
+    try
+    {
+        var validationResult = validator.Validate(recipe);
+        if (validationResult.IsValid)
+        {
+            var result = await recipeService.AddRecipe(recipe);
+            return Results.Created($"/recipes/{result.RecipeId}", result);
+        }
+        else
+        {
+            var errors = validationResult.Errors.Select(x => new { errors = x.ErrorMessage });
+            return Results.BadRequest(errors);
+        }
+
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapPost("/signup", async (IValidator<User> validator, IRecipeService recipeService, User user) =>
+{
+    try
+    {
+        var validationResult = validator.Validate(user);
+        if (validationResult.IsValid)
+        {
+            UserRecordArgs args = new()
+            {
+                Email = user.Email,
+                EmailVerified = false,
+                Password = user.Password,
+                DisplayName = user.DisplayName,
+                Disabled = false,
+            };
+
+            var createdUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(args);
+            var uid = createdUser.Uid;
+            user.UID = uid;
+            var result = await recipeService.AddUser(user);
+            return Results.Created($"/users/{result.UID}", result);
+        }
+        else
+        {
+            var errors = validationResult.Errors.Select(x => new { errors = x.ErrorMessage });
+            return Results.BadRequest(errors);
+        }
     }
     catch (Exception ex)
     {
@@ -284,7 +318,9 @@ app.MapPut("/recipes/recipe/upload/{recipeid}", [Authorize] async (IRecipeServic
 {
     try
     {
+
         var endpoint = "https://caketime.blob.core.windows.net/recipes/";
+        //TODO: extension
         var createBlob = blobService.CreateBlob($"{recipeId}.jpg", "./assets/CarrotMuffins.jpg");
         var result = await recipeService.UpdatePhoto(recipeId, $"{endpoint}{recipeId}.jpg");
         return Results.Ok(result);
