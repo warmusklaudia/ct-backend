@@ -8,4 +8,5 @@ public class DatabaseSettings
     public string? InstructionCollection { get; set; }
     public string? RecipeCollection { get; set; }
     public string? CategoryCollection { get; set; }
+    public string? UserCollection { get; set; }
 }

@@ -15,8 +15,10 @@ builder.Services.AddTransient<IIngredientRepository, IngredientRepository>();
 builder.Services.AddTransient<IInstructionRepository, InstructionRepository>();
 builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 //Services
 builder.Services.AddTransient<IRecipeService, RecipeService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 
 
@@ -235,6 +237,30 @@ app.MapPost("/recipes/all", [Authorize] async (IRecipeService recipeService, Rec
     }
 });
 
+app.MapPost("/signup", async (IUserService userService, User user) =>
+{
+    try
+    {
+        UserRecordArgs args = new()
+        {
+            Email = user.Email,
+            EmailVerified = false,
+            Password = user.Password,
+            DisplayName = user.DisplayName,
+            Disabled = false,
+        };
+
+        var createdUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(args);
+        var uid = createdUser.Uid;
+        user.UID = uid;
+        var result = await userService.AddUser(user);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
 
 // PUT
 

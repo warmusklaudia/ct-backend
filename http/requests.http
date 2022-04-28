@@ -4,7 +4,7 @@ POST https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=A
 Content-Type: application/json
 
 {
-    "email": "test@test.com",
+    "email": "warmus.klaudia@gmail.com",
     "password": "test123",
     "returnSecureToken": true
 }
@@ -125,12 +125,25 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "Email": "warmus.klaudia@gmail.com",
+    "DisplayName": "Klaudia",
+    "Password": "test123"
+}
+
+###
+
 # PUT #
 
 PUT http://localhost:3000/recipes/recipe/626999bed545b843e136c3b9
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MTA4Nzc3NywidXNlcl9pZCI6IllkOTFKN1VLdU1aMzlLcG1vb0lXZmVTNkxPcDIiLCJzdWIiOiJZZDkxSjdVS3VNWjM5S3Btb29JV2ZlUzZMT3AyIiwiaWF0IjoxNjUxMDg3Nzc3LCJleHAiOjE2NTEwOTEzNzcsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.hAl1SAKrp8r5bizPACnIzZVl-u0n4Yc1hcnAwfNI2siQpX7AtiYWj-kIE3sESvMjoj9t8uvRoPsV92bg1gzfpfy7OqwEfrYA7icFEgWJx37Epk21AdOwSQBlcbo1ufRwr1IAjUZf_sl6X9VYHgrJQnCubxbayKFZ3LZekNbVvKOUsLjL5nXx5u3akDDvi4BU65hj08dWQevczOs27hoQWNT_LXYujT0YuFL1IQrStDFb2awkQH0ms5_LvdSud7engY3w8GZYaf7Pz-71LHYWJLqO5fncbQx372Mf6t7Zu_f5DSzU9Jl6hwQyPsecdUx6xbOGmwV4-u_qnGzqL7rR-w
 
 ###
+
+
 # DELETE #
 
 DELETE http://localhost:3000/recipes/62640c83267b644aa617256 HTTP/1.1
