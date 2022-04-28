@@ -9,4 +9,6 @@ public class User
     public string Email { get; set; }
     public string DisplayName { get; set; }
     public string Password { get; set; }
+    public List<Recipe>? MyRecipes { get; set; }
+    public List<Recipe>? FavoriteRecipes { get; set; }
 }

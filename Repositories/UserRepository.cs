@@ -6,6 +6,8 @@ public interface IUserRepository
     Task<User> GetUserByUid(string uid);
     Task<List<User>> GetUsers();
     Task<User> GetUserByMail(string email);
+    Task<User> AddToFavoriteRecipes(string userUid, Recipe recipe);
+    Task<User> DeleteFromFavoriteRecipes(string userUid, Recipe recipe);
 }
 
 public class UserRepository : IUserRepository
@@ -27,4 +29,59 @@ public class UserRepository : IUserRepository
         await _context.UserCollection.InsertOneAsync(user);
         return user;
     }
+
+    public async Task<User> AddToFavoriteRecipes(string userUid, Recipe recipe)
+    {
+        try
+        {
+            User user = await GetUserByUid(userUid);
+            var filter = Builders<User>.Filter.Eq("UID", userUid);
+            if (user.FavoriteRecipes == null)
+            {
+                List<Recipe> listRecipes = new();
+                listRecipes.Add(recipe);
+                var update = Builders<User>.Update.Set(r => r.FavoriteRecipes, listRecipes);
+                var result = await _context.UserCollection.UpdateOneAsync(filter, update);
+                return await GetUserByUid(userUid);
+            }
+            else
+            {
+                var update = Builders<User>.Update.Set(r => r.FavoriteRecipes[user.FavoriteRecipes.Count()], recipe);
+                var result = await _context.UserCollection.UpdateOneAsync(filter, update);
+                return await GetUserByUid(userUid);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
+
+    }
+
+    public async Task<User> DeleteFromFavoriteRecipes(string userUid, Recipe recipe)
+    {
+        try
+        {
+            User user = await GetUserByUid(userUid);
+            var filter = Builders<User>.Filter.Eq("UID", userUid);
+            if (user.FavoriteRecipes != null)
+            {
+                Recipe r = new();
+                user.FavoriteRecipes.RemoveAll(r => r.RecipeId == recipe.RecipeId);
+                var update = Builders<User>.Update.Set(r => r.FavoriteRecipes, user.FavoriteRecipes);
+                var result = await _context.UserCollection.UpdateOneAsync(filter, update);
+            }
+            return await GetUserByUid(userUid);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
+
+    }
+
 }

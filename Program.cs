@@ -208,6 +208,21 @@ app.MapGet("/recipes/favorites/{uid}", [Authorize] async (IRecipeService recipeS
     }
 });
 
+app.MapGet("/users", async (IRecipeService recipeService) =>
+{
+    try
+    {
+        var results = await recipeService.GetUsers();
+        return Results.Ok(results);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+
 // POST
 app.MapPost("/categories", async (IRecipeService recipeService, Category category) =>
 {
@@ -280,6 +295,19 @@ app.MapPut("/recipes/recipe/upload/{recipeid}", [Authorize] async (IRecipeServic
     }
 });
 
+app.MapPut("/users/{uid}/recipes/favorite", async (IRecipeService recipeService, string uid, Recipe recipe) =>
+{
+    try
+    {
+        var result = await recipeService.ToggleFavorite(uid, recipe);
+        return Results.Ok(result);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
 
 // app.MapPut("/recipes/recipe/{recipeid}", [Authorize] async (IRecipeService recipeService, string recipeid, ClaimsPrincipal user) =>
 // {

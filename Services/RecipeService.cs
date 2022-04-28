@@ -21,6 +21,13 @@ public interface IRecipeService
     Task<Recipe> GetRecipeById(string id);
     // Task<Recipe> UpdateFavorite(string recipeid, string uid);
     Task<Recipe> UpdatePhoto(string recipeId, string uri);
+
+    // USER
+    Task<User> AddUser(User user);
+    Task<User> GetUserByUID(string uid);
+    Task<List<User>> GetUsers();
+    Task<User> GetUserByMail(string email);
+    Task<User> ToggleFavorite(string userUid, Recipe recipe);
 }
 
 public class RecipeService : IRecipeService
@@ -29,13 +36,15 @@ public class RecipeService : IRecipeService
     private readonly IInstructionRepository _instructionRepository;
     private readonly IRecipeRepository _recipeRepository;
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IUserRepository _userRepository;
 
-    public RecipeService(IIngredientRepository ingredientRepository, IInstructionRepository instructionRepository, IRecipeRepository recipeRepository, ICategoryRepository categoryRepository)
+    public RecipeService(IIngredientRepository ingredientRepository, IInstructionRepository instructionRepository, IRecipeRepository recipeRepository, ICategoryRepository categoryRepository, IUserRepository userRepository)
     {
         _ingredientRepository = ingredientRepository;
         _instructionRepository = instructionRepository;
         _recipeRepository = recipeRepository;
         _categoryRepository = categoryRepository;
+        _userRepository = userRepository;
     }
     public async Task DummyData()
     {
@@ -133,4 +142,49 @@ public class RecipeService : IRecipeService
     // public async Task<Recipe> UpdateFavorite(string recipeid, string uid) => await _recipeRepository.UpdateFavorite(recipeid, uid);
 
     public async Task DeleteRecipe(string id) => await _recipeRepository.DeleteRecipe(id);
+
+
+    // USER
+
+    public async Task<List<User>> GetUsers() => await _userRepository.GetUsers();
+    public async Task<User> GetUserByUID(string uid) => await _userRepository.GetUserByUid(uid);
+    public async Task<User> GetUserByMail(string email) => await _userRepository.GetUserByMail(email);
+    public async Task<User> AddUser(User user)
+    {
+
+        var checkUser = await GetUserByMail(user.Email);
+        if (checkUser == null)
+        {
+            return await _userRepository.AddUser(user);
+        }
+        else
+        {
+            throw new ArgumentException("An account with this email already exist");
+        }
+    }
+
+    public async Task<User> ToggleFavorite(string userUid, Recipe recipe)
+    {
+        var user = await GetUserByUID(userUid);
+        var favoriteRecipes = user.FavoriteRecipes;
+        var fullRecipe = await GetRecipeById(recipe.RecipeId);
+        if (user.FavoriteRecipes == null)
+        {
+            return await _userRepository.AddToFavoriteRecipes(userUid, fullRecipe);
+        }
+        else
+        {
+            for (int i = 0; i < user.FavoriteRecipes.Count(); i++)
+            {
+                if (user.FavoriteRecipes[i].RecipeId == recipe.RecipeId)
+                {
+                    Console.WriteLine("delete");
+                    return await _userRepository.DeleteFromFavoriteRecipes(userUid, recipe);
+                }
+            }
+            return await _userRepository.AddToFavoriteRecipes(userUid, fullRecipe);
+        }
+
+    }
+
 }
