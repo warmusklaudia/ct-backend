@@ -28,6 +28,8 @@ public interface IRecipeService
     Task<List<User>> GetUsers();
     Task<User> GetUserByMail(string email);
     Task<User> ToggleFavorite(string userUid, Recipe recipe);
+    Task<User> AddMyRecipe(string userUid, Recipe recipe);
+    Task<User> DeleteMyRecipe(string userUid, Recipe recipe);
 }
 
 public class RecipeService : IRecipeService
@@ -139,8 +141,6 @@ public class RecipeService : IRecipeService
 
     public async Task<Recipe> UpdatePhoto(string recipeId, string uri) => await _recipeRepository.UpdatePhoto(recipeId, uri);
 
-    // public async Task<Recipe> UpdateFavorite(string recipeid, string uid) => await _recipeRepository.UpdateFavorite(recipeid, uid);
-
     public async Task DeleteRecipe(string id) => await _recipeRepository.DeleteRecipe(id);
 
 
@@ -178,7 +178,6 @@ public class RecipeService : IRecipeService
             {
                 if (user.FavoriteRecipes[i].RecipeId == recipe.RecipeId)
                 {
-                    Console.WriteLine("delete");
                     return await _userRepository.DeleteFromFavoriteRecipes(userUid, recipe);
                 }
             }
@@ -186,5 +185,15 @@ public class RecipeService : IRecipeService
         }
 
     }
+
+    public async Task<User> AddMyRecipe(string userUid, Recipe recipe)
+    {
+        recipe.uidOwner = userUid;
+        Recipe newRecipe = await AddRecipe(recipe);
+        return await _userRepository.AddMyRecipe(userUid, newRecipe);
+    }
+
+    public async Task<User> DeleteMyRecipe(string userUid, Recipe recipe) => await _userRepository.DeleteMyRecipe(userUid, recipe);
+
 
 }

@@ -18,7 +18,6 @@ builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 //Services
 builder.Services.AddTransient<IRecipeService, RecipeService>();
-builder.Services.AddTransient<IUserService, UserService>();
 
 
 
@@ -64,6 +63,7 @@ app.UseAuthorization();
 
 
 //GET
+
 app.MapGet("/", () => "Hello World!");
 app.MapGet("/setup", (IRecipeService recipeService) => recipeService.DummyData());
 app.MapGet("/categories", async (IRecipeService recipeService) =>
@@ -224,6 +224,7 @@ app.MapGet("/users", async (IRecipeService recipeService) =>
 
 
 // POST
+
 app.MapPost("/categories", async (IRecipeService recipeService, Category category) =>
 {
     try
@@ -252,7 +253,7 @@ app.MapPost("/recipes/all", [Authorize] async (IRecipeService recipeService, Rec
     }
 });
 
-app.MapPost("/signup", async (IUserService userService, User user) =>
+app.MapPost("/signup", async (IRecipeService recipeService, User user) =>
 {
     try
     {
@@ -268,7 +269,7 @@ app.MapPost("/signup", async (IUserService userService, User user) =>
         var createdUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(args);
         var uid = createdUser.Uid;
         user.UID = uid;
-        var result = await userService.AddUser(user);
+        var result = await recipeService.AddUser(user);
     }
     catch (Exception ex)
     {
@@ -309,20 +310,34 @@ app.MapPut("/users/{uid}/recipes/favorite", async (IRecipeService recipeService,
     }
 });
 
-// app.MapPut("/recipes/recipe/{recipeid}", [Authorize] async (IRecipeService recipeService, string recipeid, ClaimsPrincipal user) =>
-// {
-//     try
-//     {
-//         var uid = user.FindFirstValue(ClaimTypes.UserData);
-//         var result = await recipeService.UpdateFavorite(recipeid, uid);
-//         return Results.Ok(uid);
-//     }
-//     catch (Exception ex)
-//     {
-//         Console.WriteLine(ex);
-//         throw;
-//     }
-// });
+app.MapPut("/users/{uid}/recipes/myrecipes/add", async (IRecipeService recipeService, string uid, Recipe recipe) =>
+{
+    try
+    {
+        var result = await recipeService.AddMyRecipe(uid, recipe);
+        return Results.Ok(result);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapPut("/users/{uid}/recipes/myrecipes/delete", async (IRecipeService recipeService, string uid, Recipe recipe) =>
+{
+    try
+    {
+        var result = await recipeService.DeleteMyRecipe(uid, recipe);
+        return Results.Ok(result);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
 
 // DELETE 
 

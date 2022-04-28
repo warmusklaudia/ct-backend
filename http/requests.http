@@ -157,6 +157,52 @@ Content-Type: application/json
 
 ###
 
+PUT http://localhost:3000/users/xHjCPNjMG3f5ytdBhqC9dwH5d7l2/recipes/myrecipes/add HTTP/1.1
+Content-Type: application/json
+
+{
+    "Name": "Something tasty",
+    "Category": {
+        "Name": "Cakes"
+    },
+     "Ingredients": [
+        {
+            "Name": "Something",
+            "Quantity": "1 kg"
+        },
+        {
+            "Name": "Flour",
+            "Quantity": "120g"
+        },
+        {
+            "Name": "Baking powder",
+            "Quantity": "1 tsp"
+        }
+    ],
+    "Instructions": [
+        {
+            "Name": "Step 1",
+            "Manual": "Put flour in the bowl"
+        },
+        {
+            "Name": "Step 2",
+            "Manual": "Mix it together with something"
+        }
+    ]
+}
+
+###
+
+PUT http://localhost:3000/users/xHjCPNjMG3f5ytdBhqC9dwH5d7l2/recipes/myrecipes/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "recipeId": "626a958b2b5ecbfb16af4457"
+}
+
+
+
+###
 
 # DELETE #
 

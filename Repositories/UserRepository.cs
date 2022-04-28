@@ -8,6 +8,8 @@ public interface IUserRepository
     Task<User> GetUserByMail(string email);
     Task<User> AddToFavoriteRecipes(string userUid, Recipe recipe);
     Task<User> DeleteFromFavoriteRecipes(string userUid, Recipe recipe);
+    Task<User> AddMyRecipe(string userUid, Recipe recipe);
+    Task<User> DeleteMyRecipe(string userUid, Recipe recipe);
 }
 
 public class UserRepository : IUserRepository
@@ -71,6 +73,58 @@ public class UserRepository : IUserRepository
                 Recipe r = new();
                 user.FavoriteRecipes.RemoveAll(r => r.RecipeId == recipe.RecipeId);
                 var update = Builders<User>.Update.Set(r => r.FavoriteRecipes, user.FavoriteRecipes);
+                var result = await _context.UserCollection.UpdateOneAsync(filter, update);
+            }
+            return await GetUserByUid(userUid);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
+
+    }
+
+    public async Task<User> AddMyRecipe(string userUid, Recipe recipe)
+    {
+        try
+        {
+            User user = await GetUserByUid(userUid);
+            var filter = Builders<User>.Filter.Eq("UID", userUid);
+            if (user.MyRecipes == null)
+            {
+                List<Recipe> listRecipes = new();
+                listRecipes.Add(recipe);
+                var update = Builders<User>.Update.Set(r => r.MyRecipes, listRecipes);
+                var result = await _context.UserCollection.UpdateOneAsync(filter, update);
+                return await GetUserByUid(userUid);
+            }
+            else
+            {
+                var update = Builders<User>.Update.Set(r => r.MyRecipes[user.MyRecipes.Count()], recipe);
+                var result = await _context.UserCollection.UpdateOneAsync(filter, update);
+                return await GetUserByUid(userUid);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
+    }
+
+    public async Task<User> DeleteMyRecipe(string userUid, Recipe recipe)
+    {
+        try
+        {
+            User user = await GetUserByUid(userUid);
+            var filter = Builders<User>.Filter.Eq("UID", userUid);
+            if (user.MyRecipes != null)
+            {
+                Recipe r = new();
+                user.MyRecipes.RemoveAll(r => r.RecipeId == recipe.RecipeId);
+                var update = Builders<User>.Update.Set(r => r.MyRecipes, user.MyRecipes);
                 var result = await _context.UserCollection.UpdateOneAsync(filter, update);
             }
             return await GetUserByUid(userUid);

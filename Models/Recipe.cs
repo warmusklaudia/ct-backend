@@ -7,7 +7,7 @@ public class Recipe
     public string RecipeId { get; set; }
     public string Name { get; set; }
     public string uidOwner { get; set; }
-    public List<string> uidFavorites { get; set; }
+    public List<string>? uidFavorites { get; set; }
     public int? Time { get; set; }
     public Category Category { get; set; }
     public int? Servings { get; set; }
