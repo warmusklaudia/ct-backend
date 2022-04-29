@@ -26,11 +26,11 @@ Content-Type: application/json
 # GET #
 GET http://localhost:3000/recipes/all HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImVmMzAxNjFhOWMyZGI3ODA5ZjQ1MTNiYjRlZDA4NzNmNDczMmY3MjEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjIxMzI4LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjEzMjgsImV4cCI6MTY1MTIyNDkyOCwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.qtsI-h5WyM-wCMAS3HziEYgqsTQ8ygpCabVBbE6Lpb7FPZ2FQ4T7sfCEnfJsrUWNnLzVVIUl_QUNm1FUbsvTSCvSSMoYynaGpY6oByQGEub0rT7Uh1oone3Asj_kzgG-CqFzzyZEz1L9S5b-YGx_R_wWTn4FGBmyoUIYNYbjn_nkNCJZDCzgx3n1st9wzp-r1lkkg7ArwbujpfRjgABriy00owm_K0gVkmjx6hsOI76zPXBwDt15A-QPWKIHN2mMpxjIjXzQ-mpoAQ51BzFcy5QFCQ9qBzxnm8x6tloeEdyzEhWFc2r7OvDpaQLXUWOPf21tJ9yEH9bbfEPFsRMoGA
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImVmMzAxNjFhOWMyZGI3ODA5ZjQ1MTNiYjRlZDA4NzNmNDczMmY3MjEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MzcyLCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQzNzIsImV4cCI6MTY1MTIyNzk3MiwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.k6i5UzhiOrIbQxYwxLEUyoD1IQCmiycXMn76HZncOryD0xBNKhV8NgP-ApOVAL0yifQaYBzUeyJdfl2oB1ENuyZnDpFhuxbfFlTimx3SxswyFOx_hc7BApWueyxDQH5778wu0pyp5ogIMYkrZED6K-lo9Door4VBb_deI0emD3yJi0a39KpMi1TXq38TTpMba1cMoGiDnClD5qJJCA0TOuHJeX8SZYM-Xe7fBdkk3xU9xGBIUn4s4TlUCYhNKkQrIM_fbPlRvOr8oUsbUrWBtMTNsSMsj8zF9opQ_6xYJOhtnZNryBiCmFa74GimHg-B36Vs21OnVUIvhPa42EQuTw
 
 ###
 
-GET http://localhost:3000/recipes/recipe/6267ea783a37d8c0d83c7ea3 HTTP/1.1
+GET http://localhost:3000/recipes/recipe/626baf889b23cb23a0dd49b3 HTTP/1.1
 Content-Type: application/json
 
 ###
@@ -64,18 +64,20 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/recipes/all/Yd91J7UKuMZ39KpmooIWfeS6LOp2
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMTU2MzAzLCJ1c2VyX2lkIjoieEhqQ1BOak1HM2Y1eXRkQmhxQzlkd0g1ZDdsMiIsInN1YiI6InhIakNQTmpNRzNmNXl0ZEJocUM5ZHdINWQ3bDIiLCJpYXQiOjE2NTExNTYzMDMsImV4cCI6MTY1MTE1OTkwMywiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.ID9Qe7EYixVc1KCRJynOXfjQyDqrNrRK35AViLYxw7jISddhIhi6TkIpqBgzVCA2z5cvPXbPlzgqZyItXMfKeFvqyyv52z_6Vn4a474KOYrgxOufU2XrODTtVFGKA3f6zjtX8lrm1nrO0edCdU_35gldA-Y3Ld4GOfX3QqpuWqMCX6X_n-qwdKrbpbY-5XESEOvB78FUOTgevRmM-sRsuGX89VBkEsagGTtBE0ZPlgqN77kNdbyJoM8_XKoC06Ii4KCDBBoIEDUdrcW-TLcapvyLus8hmfYy24uuFQCrAqZrw5t6CC5qK0_13XtXk84jCIKQXiiU-ySIPdqdLjamGQ
+GET http://localhost:3000/recipes/all/1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MDU1LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQwNTUsImV4cCI6MTY1MTIyNzY1NSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.E0a9GbemjvvdjW-xxOsUE2X_WwZzOsk5ViRnsrs8N_B9o99nC2mdbhwwtPrRWHOExULHuY8Lu9ve7DEZswCB4kkH2ty37IYRFPaA-CAtIKcQHdgrKkCKBXHkBRyfv67K4OpNTL0juR5gu_4chrL6AaAjqrxvrTfPUaKU0glfhWVYB9kKhumeHjSf8yuPQeu5W9d-62yEnd7DreKuvg506vJPneByDHtuxkoCNoRe-ynPjqiyhpwUK3cN0pdEkf7L5pIK3N_8oGCycPJULaTpdUqSZaichvF6TBogrVyfiaBljGrUfYoeOqGL8MkJr4zE_imBNQ5qT4UGtiaNeSKn7Q
 
 ###
 
 Get http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MDU1LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQwNTUsImV4cCI6MTY1MTIyNzY1NSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.E0a9GbemjvvdjW-xxOsUE2X_WwZzOsk5ViRnsrs8N_B9o99nC2mdbhwwtPrRWHOExULHuY8Lu9ve7DEZswCB4kkH2ty37IYRFPaA-CAtIKcQHdgrKkCKBXHkBRyfv67K4OpNTL0juR5gu_4chrL6AaAjqrxvrTfPUaKU0glfhWVYB9kKhumeHjSf8yuPQeu5W9d-62yEnd7DreKuvg506vJPneByDHtuxkoCNoRe-ynPjqiyhpwUK3cN0pdEkf7L5pIK3N_8oGCycPJULaTpdUqSZaichvF6TBogrVyfiaBljGrUfYoeOqGL8MkJr4zE_imBNQ5qT4UGtiaNeSKn7Q
 
 ###
 
-GET http://localhost:3000/users/PtTz0Py0B0Uxok5Fs5EfhHLe1eh1 HTTP/1.1
+GET http://localhost:3000/users/kIWFsGrQ6rO8irrbE7vGAmfodu72 HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MDU1LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQwNTUsImV4cCI6MTY1MTIyNzY1NSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.E0a9GbemjvvdjW-xxOsUE2X_WwZzOsk5ViRnsrs8N_B9o99nC2mdbhwwtPrRWHOExULHuY8Lu9ve7DEZswCB4kkH2ty37IYRFPaA-CAtIKcQHdgrKkCKBXHkBRyfv67K4OpNTL0juR5gu_4chrL6AaAjqrxvrTfPUaKU0glfhWVYB9kKhumeHjSf8yuPQeu5W9d-62yEnd7DreKuvg506vJPneByDHtuxkoCNoRe-ynPjqiyhpwUK3cN0pdEkf7L5pIK3N_8oGCycPJULaTpdUqSZaichvF6TBogrVyfiaBljGrUfYoeOqGL8MkJr4zE_imBNQ5qT4UGtiaNeSKn7Q
 
 ###
 
@@ -86,66 +88,77 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImVmMzAxNjFhOWMyZGI3ODA5ZjQ1MTNiYjRlZDA4NzNmNDczMmY3MjEiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjIxMzI4LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjEzMjgsImV4cCI6MTY1MTIyNDkyOCwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.qtsI-h5WyM-wCMAS3HziEYgqsTQ8ygpCabVBbE6Lpb7FPZ2FQ4T7sfCEnfJsrUWNnLzVVIUl_QUNm1FUbsvTSCvSSMoYynaGpY6oByQGEub0rT7Uh1oone3Asj_kzgG-CqFzzyZEz1L9S5b-YGx_R_wWTn4FGBmyoUIYNYbjn_nkNCJZDCzgx3n1st9wzp-r1lkkg7ArwbujpfRjgABriy00owm_K0gVkmjx6hsOI76zPXBwDt15A-QPWKIHN2mMpxjIjXzQ-mpoAQ51BzFcy5QFCQ9qBzxnm8x6tloeEdyzEhWFc2r7OvDpaQLXUWOPf21tJ9yEH9bbfEPFsRMoGA
 
 {
-    "Name": "Pavlova",
-    "Time": 120,
+    "Name": "Apple cake",
+    "uidOwner": "1",
+    "Time": 90,
     "Category": {
-        "name": "Meringues"
+        "id": "624c42fafa5c324421899f19",
+        "name": "Cakes"
     },
-    "Servings": 6,
+    "Servings": 8,
     "Difficulty": "Medium",
     "Ingredients": [{
-        "Name": "Egg whites",
-        "Quantity": "6"
+        "Name": "Flour",
+        "Quantity": "400g"
     },
     {
         "Name": "Sugar",
-        "Quantity": "240g"
+        "Quantity": "60g"
     },
     {
-        "Name": "Potato starch",
-        "Quantity": "1 tbsp"
+        "Name": "Vanilla sugar",
+        "Quantity": "2 tsp"
     },
     {
-        "Name": "Lemon juice",
+        "Name": "Butter",
+        "Quantity": "250g"
+    },
+    {
+        "Name": "Baking powder",
         "Quantity": "1 tsp"
     },
     {
-        "Name": "Salt",
-        "Quantity": "Pinch of"
+        "Name": "Egg",
+        "Quantity": "1"
     },
     {
-        "Name": "Whipping cream 36%",
-        "Quantity": "200ml"
+        "Name": "Apples",
+        "Quantity": "1,5kg"
     },
     {
-        "Name": "Raspberries",
-        "Quantity": "250g"
+        "Name": "Cinnamon",
+        "Quantity": "2 tsp"
+    },
+    {
+        "Name": "Lemon juice",
+        "Quantity": "2 tbsp"
+    },
+    {
+        "Name": "Almond flakes",
+        "Quantity": "50g"
     }],
     "Instructions": [{
         "Name" : "Step 1",
-        "Manual": "Whip the egg whites with a pinch of salt. After 3 minutes, start adding sugar gradually. Add lemon juice and potato starch and whip a few more minutes. "
+        "Manual": "Put flour, 30g sugar, vanilla sugar, butter, baking powder and egg into a bowl and knead the dough."
     },
     {
         "Name": "Step 2",
-        "Manual": "Make a circle with whipped egg whites on the baking sheet and put in the oven preheated to 150 degrees. After 7 minutes, reduce the temperature to 110 degrees and dry it for 100 minutes. After baking, leave it in the oven for next 30 minutes. "
+        "Manual": "Put 1/3 of the dough into the freezer. Put the rest of the dough on a baking tray and bake for 12 minutes in the oven at 180 degrees."
     },
     {
         "Name": "Step 3",
-        "Manual": "Whip the cream with 2 tablespoons sugar. "
+        "Manual": "Grate apples, sprinkle with lemon juice and mix. Put in a pan, pour 2 tablespoons of water. Add sugar, cinnamon and mix. Fry until evaporation. Cool it."
     },
     {
         "Name": "Step 4",
-        "Manual": "Blend raspberries."
+        "Manual": "Put the apples on the baked dough. Grate the rest of the dough and sprinkle with almond flakes. Bake 45 minutes at 175 degrees."
     },
     {
         "Name": "Step 5",
-        "Manual": "Take meringue from the oven, put the whipped cream on the top and pour over the raspberry mousse."
-    },
-    {
-        "Name": "Step 6",
-        "Manual": "Your Pavlova is ready. Enjoy!"
+        "Manual": "Your apple cake is ready. Enjoy!"
     }]
 }
+
 
 
 
@@ -154,6 +167,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImVmMzAxNjFhOWMyZGI3ODA5ZjQ1MT
 
 POST http://localhost:3000/categories HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MDU1LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQwNTUsImV4cCI6MTY1MTIyNzY1NSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.E0a9GbemjvvdjW-xxOsUE2X_WwZzOsk5ViRnsrs8N_B9o99nC2mdbhwwtPrRWHOExULHuY8Lu9ve7DEZswCB4kkH2ty37IYRFPaA-CAtIKcQHdgrKkCKBXHkBRyfv67K4OpNTL0juR5gu_4chrL6AaAjqrxvrTfPUaKU0glfhWVYB9kKhumeHjSf8yuPQeu5W9d-62yEnd7DreKuvg506vJPneByDHtuxkoCNoRe-ynPjqiyhpwUK3cN0pdEkf7L5pIK3N_8oGCycPJULaTpdUqSZaichvF6TBogrVyfiaBljGrUfYoeOqGL8MkJr4zE_imBNQ5qT4UGtiaNeSKn7Q
 
 {
     "Name": "Others",
@@ -166,8 +180,8 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "Email": "warmus.klaudia@gmail.com",
-    "DisplayName": "Klaudia",
+    "Email": "test@gmail.com",
+    "DisplayName": "Test",
     "Password": "test123"
 }
 
@@ -176,23 +190,24 @@ Content-Type: application/json
 
 # PUT #
 
-PUT http://localhost:3000/recipes/recipe/626999bed545b843e136c3b9
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FrZXRpbWUtNTYxZTMiLCJhdWQiOiJjYWtldGltZS01NjFlMyIsImF1dGhfdGltZSI6MTY1MTA4Nzc3NywidXNlcl9pZCI6IllkOTFKN1VLdU1aMzlLcG1vb0lXZmVTNkxPcDIiLCJzdWIiOiJZZDkxSjdVS3VNWjM5S3Btb29JV2ZlUzZMT3AyIiwiaWF0IjoxNjUxMDg3Nzc3LCJleHAiOjE2NTEwOTEzNzcsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.hAl1SAKrp8r5bizPACnIzZVl-u0n4Yc1hcnAwfNI2siQpX7AtiYWj-kIE3sESvMjoj9t8uvRoPsV92bg1gzfpfy7OqwEfrYA7icFEgWJx37Epk21AdOwSQBlcbo1ufRwr1IAjUZf_sl6X9VYHgrJQnCubxbayKFZ3LZekNbVvKOUsLjL5nXx5u3akDDvi4BU65hj08dWQevczOs27hoQWNT_LXYujT0YuFL1IQrStDFb2awkQH0ms5_LvdSud7engY3w8GZYaf7Pz-71LHYWJLqO5fncbQx372Mf6t7Zu_f5DSzU9Jl6hwQyPsecdUx6xbOGmwV4-u_qnGzqL7rR-w
+PUT http://localhost:3000/recipes/recipe/upload/626999bed545b843e136c3b9
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MDU1LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQwNTUsImV4cCI6MTY1MTIyNzY1NSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.E0a9GbemjvvdjW-xxOsUE2X_WwZzOsk5ViRnsrs8N_B9o99nC2mdbhwwtPrRWHOExULHuY8Lu9ve7DEZswCB4kkH2ty37IYRFPaA-CAtIKcQHdgrKkCKBXHkBRyfv67K4OpNTL0juR5gu_4chrL6AaAjqrxvrTfPUaKU0glfhWVYB9kKhumeHjSf8yuPQeu5W9d-62yEnd7DreKuvg506vJPneByDHtuxkoCNoRe-ynPjqiyhpwUK3cN0pdEkf7L5pIK3N_8oGCycPJULaTpdUqSZaichvF6TBogrVyfiaBljGrUfYoeOqGL8MkJr4zE_imBNQ5qT4UGtiaNeSKn7Q
 
 ###
 
 PUT http://localhost:3000/users/PtTz0Py0B0Uxok5Fs5EfhHLe1eh1/recipes/favorite HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MDU1LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQwNTUsImV4cCI6MTY1MTIyNzY1NSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.E0a9GbemjvvdjW-xxOsUE2X_WwZzOsk5ViRnsrs8N_B9o99nC2mdbhwwtPrRWHOExULHuY8Lu9ve7DEZswCB4kkH2ty37IYRFPaA-CAtIKcQHdgrKkCKBXHkBRyfv67K4OpNTL0juR5gu_4chrL6AaAjqrxvrTfPUaKU0glfhWVYB9kKhumeHjSf8yuPQeu5W9d-62yEnd7DreKuvg506vJPneByDHtuxkoCNoRe-ynPjqiyhpwUK3cN0pdEkf7L5pIK3N_8oGCycPJULaTpdUqSZaichvF6TBogrVyfiaBljGrUfYoeOqGL8MkJr4zE_imBNQ5qT4UGtiaNeSKn7Q
 
 {
-    "recipeId": "626ba360d3191f4a98c577c0"
+    "recipeId": "626baf889b23cb23a0dd49b3"
 }
 
 ###
 
-PUT http://localhost:3000/users/Vd8P895qrOe1RycDQJuwZTFLVSA3/recipes/myrecipes/add HTTP/1.1
+PUT http://localhost:3000/users/PtTz0Py0B0Uxok5Fs5EfhHLe1eh1/recipes/myrecipes/add HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMTU3MDAxLCJ1c2VyX2lkIjoiVmQ4UDg5NXFyT2UxUnljRFFKdXdaVEZMVlNBMyIsInN1YiI6IlZkOFA4OTVxck9lMVJ5Y0RRSnV3WlRGTFZTQTMiLCJpYXQiOjE2NTExNTcwMDEsImV4cCI6MTY1MTE2MDYwMSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.KWHbT0RlqbezebD58T9zNbHMrD8M_YWHT13asie3dF-mKCLnG7MwPZAf-_eqndA1JYjhyz65__syFAdruUcbCcq8E4QZXv3oB_RiY1xceehR5IChr5b-kM4JQ7hy-f43x0XTtm0ku_5HhSMNsqDdMqcppz6rKhquagcyIYNwnv1wSO_9Nh9IF9_ZBmQEeub_MM9p4XCK4TSHUppwlbDpkWZaOHYaSVSGVL11z39YS3CnPYe3W-zsnVHKRFTxlTfxf3rC0sKf4zSeP3Q3TS-a1NpmqhK74hbJ8Z0d4J93VC2-DnGY0P_uR_EVcHOsdkIQQn5HffdzikzNIxWnUVvxGw
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2NzNkM2M5NDdhZWIxOGI2NGU1OGUzZWRlMzI1NWZiZjU3NTI4NWIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS2xhdWRpYSIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9jYWtldGltZS01NjFlMyIsImF1ZCI6ImNha2V0aW1lLTU2MWUzIiwiYXV0aF90aW1lIjoxNjUxMjI0MDU1LCJ1c2VyX2lkIjoiUHRUejBQeTBCMFV4b2s1RnM1RWZoSExlMWVoMSIsInN1YiI6IlB0VHowUHkwQjBVeG9rNUZzNUVmaEhMZTFlaDEiLCJpYXQiOjE2NTEyMjQwNTUsImV4cCI6MTY1MTIyNzY1NSwiZW1haWwiOiJ3YXJtdXMua2xhdWRpYUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsid2FybXVzLmtsYXVkaWFAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.E0a9GbemjvvdjW-xxOsUE2X_WwZzOsk5ViRnsrs8N_B9o99nC2mdbhwwtPrRWHOExULHuY8Lu9ve7DEZswCB4kkH2ty37IYRFPaA-CAtIKcQHdgrKkCKBXHkBRyfv67K4OpNTL0juR5gu_4chrL6AaAjqrxvrTfPUaKU0glfhWVYB9kKhumeHjSf8yuPQeu5W9d-62yEnd7DreKuvg506vJPneByDHtuxkoCNoRe-ynPjqiyhpwUK3cN0pdEkf7L5pIK3N_8oGCycPJULaTpdUqSZaichvF6TBogrVyfiaBljGrUfYoeOqGL8MkJr4zE_imBNQ5qT4UGtiaNeSKn7Q
 
 {
     "Name": "Something tasty",

@@ -106,7 +106,10 @@ app.MapGet("/categories/{name}", async (IRecipeService recipeService, string nam
     try
     {
         var result = await recipeService.GetCategoryByName(name);
-        return Results.Ok(result);
+        if (result != null)
+            return Results.Ok(result);
+        else
+            return Results.NotFound($"Category {name} not fount");
     }
     catch (Exception ex)
     {
@@ -134,7 +137,10 @@ app.MapGet("/ingredients/{name}/{quantity}", async (IRecipeService recipeService
     try
     {
         var results = await recipeService.GetIngredientByNameAndQuantity(name, quantity);
-        return Results.Ok(results);
+        if (results != null)
+            return Results.Ok(results);
+        else
+            return Results.NotFound("Ingredient not found");
     }
     catch (Exception ex)
     {
@@ -162,7 +168,10 @@ app.MapGet("/instructions/{name}/{manual}", async (IRecipeService recipeService,
     try
     {
         var results = await recipeService.GetInstructionByNameAndManual(name, manual);
-        return Results.Ok(results);
+        if (results != null)
+            return Results.Ok(results);
+        else
+            return Results.NotFound("Instruction not found");
     }
     catch (Exception ex)
     {
@@ -176,7 +185,10 @@ app.MapGet("/recipes/recipe/{recipeid}", async (IRecipeService recipeService, st
     try
     {
         var results = await recipeService.GetRecipeById(recipeid);
-        return Results.Ok(results);
+        if (results != null)
+            return Results.Ok(results);
+        else
+            return Results.NotFound("Recipe not found");
     }
     catch (Exception ex)
     {
@@ -204,7 +216,10 @@ app.MapGet("/recipes/all/{uid}", [Authorize] async (IRecipeService recipeService
     try
     {
         var results = await recipeService.GetRecipesByOwner(uid);
-        return Results.Ok(results);
+        if (results != null)
+            return Results.Ok(results);
+        else
+            return Results.NotFound($"This user created no recipes yet");
     }
     catch (Exception ex)
     {
@@ -214,7 +229,7 @@ app.MapGet("/recipes/all/{uid}", [Authorize] async (IRecipeService recipeService
 });
 
 
-app.MapGet("/users", async (IRecipeService recipeService) =>
+app.MapGet("/users", [Authorize] async (IRecipeService recipeService) =>
 {
     try
     {
@@ -228,12 +243,15 @@ app.MapGet("/users", async (IRecipeService recipeService) =>
     }
 });
 
-app.MapGet("/users/{uid}", async (IMapper mapper, IRecipeService recipeService, string uid) =>
+app.MapGet("/users/{uid}", [Authorize] async (IMapper mapper, IRecipeService recipeService, string uid) =>
 {
     try
     {
         var results = await recipeService.GetUserByUID(uid);
-        return Results.Ok(mapper.Map<UserDTO>(results));
+        if (results != null)
+            return Results.Ok(mapper.Map<UserDTO>(results));
+        else
+            return Results.NotFound("User not found");
     }
     catch (Exception ex)
     {
@@ -348,7 +366,7 @@ app.MapPut("/recipes/recipe/upload/{recipeid}", [Authorize] async (IRecipeServic
     }
 });
 
-app.MapPut("/users/{uid}/recipes/favorite", async (IRecipeService recipeService, string uid, Recipe recipe) =>
+app.MapPut("/users/{uid}/recipes/favorite", [Authorize] async (IRecipeService recipeService, string uid, Recipe recipe) =>
 {
     try
     {
@@ -362,7 +380,7 @@ app.MapPut("/users/{uid}/recipes/favorite", async (IRecipeService recipeService,
     }
 });
 
-app.MapPut("/users/{uid}/recipes/myrecipes/add", async (IRecipeService recipeService, string uid, Recipe recipe) =>
+app.MapPut("/users/{uid}/recipes/myrecipes/add", [Authorize] async (IRecipeService recipeService, string uid, Recipe recipe) =>
 {
     try
     {
@@ -376,7 +394,7 @@ app.MapPut("/users/{uid}/recipes/myrecipes/add", async (IRecipeService recipeSer
     }
 });
 
-app.MapPut("/users/{uid}/recipes/myrecipes/delete", async (IRecipeService recipeService, string uid, Recipe recipe) =>
+app.MapPut("/users/{uid}/recipes/myrecipes/delete", [Authorize] async (IRecipeService recipeService, string uid, Recipe recipe) =>
 {
     try
     {

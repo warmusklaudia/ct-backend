@@ -21,7 +21,16 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<List<User>> GetUsers() => await _context.UserCollection.Find(_ => true).ToListAsync();
+    public async Task<List<User>> GetUsers()
+    {
+        var projection = Builders<User>.Projection.Exclude(u => u.Password);
+
+        var users = (await _context.UserCollection.FindAsync(
+            filter: _ => true,
+            options: new FindOptions<User, User> { Projection = projection })
+            ).ToListAsync();
+        return await users;
+    }
 
     public async Task<User> GetUserByUid(string uid)
     {
