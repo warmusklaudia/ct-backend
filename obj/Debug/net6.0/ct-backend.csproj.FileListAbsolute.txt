@@ -87,3 +87,5 @@ C:\ct-backend\bin\Debug\net6.0\System.Memory.Data.dll
 C:\ct-backend\bin\Debug\net6.0\FluentValidation.dll
 C:\ct-backend\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
 C:\ct-backend\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\ct-backend\bin\Debug\net6.0\AutoMapper.dll
+C:\ct-backend\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

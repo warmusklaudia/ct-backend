@@ -53,6 +53,8 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(opt =>
     };
 });
 
+//Automapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 //Swagger
@@ -65,6 +67,20 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+app.UseExceptionHandler(c => c.Run(async context =>
+{
+    var exception = context.Features
+        .Get<IExceptionHandlerFeature>()
+        ?.Error;
+    if (exception is not null)
+    {
+        var response = new { error = exception.Message };
+        context.Response.StatusCode = 400;
+
+        await context.Response.WriteAsJsonAsync(response);
+    }
+}));
 
 //GET
 
@@ -212,12 +228,12 @@ app.MapGet("/users", async (IRecipeService recipeService) =>
     }
 });
 
-app.MapGet("/users/{uid}", async (IRecipeService recipeService, string uid) =>
+app.MapGet("/users/{uid}", async (IMapper mapper, IRecipeService recipeService, string uid) =>
 {
     try
     {
         var results = await recipeService.GetUserByUID(uid);
-        return Results.Ok(results);
+        return Results.Ok(mapper.Map<UserDTO>(results));
     }
     catch (Exception ex)
     {

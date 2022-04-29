@@ -2,6 +2,7 @@
 global using System;
 global using Microsoft.Extensions.Options;
 global using Google.Apis.Auth.OAuth2;
+global using Microsoft.AspNetCore.Diagnostics;
 
 //NUGET
 global using MongoDB.Bson;
@@ -17,6 +18,7 @@ global using Azure.Storage.Blobs;
 global using Azure.Storage.Blobs.Models;
 global using FluentValidation;
 global using FluentValidation.AspNetCore;
+global using AutoMapper;
 
 //CUSTOMER
 global using Caketime.Context;
@@ -27,3 +29,4 @@ global using Caketime.Services;
 global using Caketime.GraphQL.Queries;
 global using Caketime.GraphQL.Mutations;
 global using Caketime.Validators;
+global using Caketime.DTO;

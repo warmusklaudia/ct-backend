@@ -23,7 +23,17 @@ public class UserRepository : IUserRepository
 
     public async Task<List<User>> GetUsers() => await _context.UserCollection.Find(_ => true).ToListAsync();
 
-    public async Task<User> GetUserByUid(string uid) => await _context.UserCollection.Find<User>(u => u.UID == uid).FirstOrDefaultAsync();
+    public async Task<User> GetUserByUid(string uid)
+    {
+        var projection = Builders<User>.Projection.Exclude(u => u.Password);
+
+        var user = (await _context.UserCollection.FindAsync(
+            filter: u => u.UID == uid,
+            options: new FindOptions<User, User> { Projection = projection })
+            ).SingleOrDefaultAsync();
+
+        return await user;
+    }
     public async Task<User> GetUserByMail(string email) => await _context.UserCollection.Find<User>(u => u.Email == email).FirstOrDefaultAsync();
 
     public async Task<User> AddUser(User user)
