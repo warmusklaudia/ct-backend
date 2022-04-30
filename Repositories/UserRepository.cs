@@ -61,13 +61,13 @@ public class UserRepository : IUserRepository
             {
                 List<Recipe> listRecipes = new();
                 listRecipes.Add(recipe);
-                var update = Builders<User>.Update.Set(r => r.FavoriteRecipes, listRecipes);
+                var update = Builders<User>.Update.Set(u => u.FavoriteRecipes, listRecipes);
                 var result = await _context.UserCollection.UpdateOneAsync(filter, update);
                 return await GetUserByUid(userUid);
             }
             else
             {
-                var update = Builders<User>.Update.Set(r => r.FavoriteRecipes[user.FavoriteRecipes.Count()], recipe);
+                var update = Builders<User>.Update.Set(u => u.FavoriteRecipes[user.FavoriteRecipes.Count()], recipe);
                 var result = await _context.UserCollection.UpdateOneAsync(filter, update);
                 return await GetUserByUid(userUid);
             }
@@ -89,7 +89,7 @@ public class UserRepository : IUserRepository
             var filter = Builders<User>.Filter.Eq("UID", userUid);
             if (user.FavoriteRecipes != null)
             {
-                Recipe r = new();
+                // Recipe r = new();
                 user.FavoriteRecipes.RemoveAll(r => r.RecipeId == recipe.RecipeId);
                 var update = Builders<User>.Update.Set(r => r.FavoriteRecipes, user.FavoriteRecipes);
                 var result = await _context.UserCollection.UpdateOneAsync(filter, update);

@@ -1,2 +1,4 @@
 data
 /auth/service-account.json
+appsettings.json
+appsettings.Docker.json

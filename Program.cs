@@ -118,6 +118,23 @@ app.MapGet("/categories/{name}", async (IRecipeService recipeService, string nam
     }
 });
 
+app.MapGet("/categories/{id}", async (IRecipeService recipeService, string id) =>
+{
+    try
+    {
+        var result = await recipeService.GetCategoryById(id);
+        if (result != null)
+            return Results.Ok(result);
+        else
+            return Results.NotFound($"Category not fount");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
 app.MapGet("/ingredients", async (IRecipeService recipeService) =>
 {
     try
@@ -197,7 +214,7 @@ app.MapGet("/recipes/recipe/{recipeid}", async (IRecipeService recipeService, st
     }
 });
 
-app.MapGet("/recipes/all", [Authorize] async (IRecipeService recipeService) =>
+app.MapGet("/recipes/all", async (IRecipeService recipeService) =>
 {
     try
     {
@@ -263,7 +280,7 @@ app.MapGet("/users/{uid}", [Authorize] async (IMapper mapper, IRecipeService rec
 
 // POST
 
-app.MapPost("/categories", [Authorize] async (IValidator<Category> validator, IRecipeService recipeService, Category category) =>
+app.MapPost("/categories", async (IValidator<Category> validator, IRecipeService recipeService, Category category) =>
 {
     try
     {
@@ -352,11 +369,8 @@ app.MapPut("/recipes/recipe/upload/{recipeid}", [Authorize] async (IRecipeServic
 {
     try
     {
-
-        var endpoint = "https://caketime.blob.core.windows.net/recipes/";
-        //TODO: extension
-        var createBlob = blobService.CreateBlob($"{recipeId}.jpg", "./assets/CarrotMuffins.jpg");
-        var result = await recipeService.UpdatePhoto(recipeId, $"{endpoint}{recipeId}.jpg");
+        var filepath = "./assets/Pavlova.jpg";
+        var result = await recipeService.UpdatePhoto(recipeId, filepath);
         return Results.Ok(result);
     }
     catch (Exception ex)
@@ -409,6 +423,7 @@ app.MapPut("/users/{uid}/recipes/myrecipes/delete", [Authorize] async (IRecipeSe
 });
 
 
+
 // DELETE 
 
 app.MapDelete("/recipes/{id}", [Authorize] async (IRecipeService recipeService, string id) =>
@@ -426,3 +441,5 @@ app.MapDelete("/recipes/{id}", [Authorize] async (IRecipeService recipeService, 
 });
 
 app.Run("http://localhost:3000");
+// app.Run();
+// public partial class Program { }

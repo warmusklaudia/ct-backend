@@ -19,7 +19,7 @@ public interface IRecipeService
     Task<List<Recipe>> GetRecipesByOwner(string uid);
     Task<Recipe> GetRecipeById(string id);
     // Task<Recipe> UpdateFavorite(string recipeid, string uid);
-    Task<Recipe> UpdatePhoto(string recipeId, string uri);
+    Task<Recipe> UpdatePhoto(string recipeId, string filepath);
 
     // USER
     Task<User> AddUser(User user);
@@ -40,14 +40,16 @@ public class RecipeService : IRecipeService
     private readonly IRecipeRepository _recipeRepository;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IBlobService _blobService;
 
-    public RecipeService(IIngredientRepository ingredientRepository, IInstructionRepository instructionRepository, IRecipeRepository recipeRepository, ICategoryRepository categoryRepository, IUserRepository userRepository)
+    public RecipeService(IIngredientRepository ingredientRepository, IInstructionRepository instructionRepository, IRecipeRepository recipeRepository, ICategoryRepository categoryRepository, IUserRepository userRepository, IBlobService blobService)
     {
         _ingredientRepository = ingredientRepository;
         _instructionRepository = instructionRepository;
         _recipeRepository = recipeRepository;
         _categoryRepository = categoryRepository;
         _userRepository = userRepository;
+        _blobService = blobService;
     }
     public async Task DummyData()
     {
@@ -85,7 +87,15 @@ public class RecipeService : IRecipeService
     public async Task<Category> GetCategoryByName(string name) => await _categoryRepository.GetCategoryByName(name);
     public async Task<Category> GetCategoryById(string id) => await _categoryRepository.GetCategoryById(id);
 
-    public async Task<Category> UpdateCategory(string id, string name) => await _categoryRepository.UpdateCategory(id, name);
+    public async Task<Category> UpdateCategory(string id, string name)
+    {
+        var checkCategory = await _categoryRepository.GetCategoryByName(name);
+        if (checkCategory == null)
+            return await _categoryRepository.UpdateCategory(id, name);
+        else
+            throw new ArgumentException($"Category with name {name} already exist");
+    }
+
     public async Task<Ingredient> AddIngredient(Ingredient newIngredient)
     {
         return await _ingredientRepository.AddIngredient(newIngredient);
@@ -139,10 +149,20 @@ public class RecipeService : IRecipeService
     }
     public async Task<Category> AddCategory(Category newCategory)
     {
-        return await _categoryRepository.AddCategory(newCategory);
+        var checkCategory = await _categoryRepository.GetCategoryByName(newCategory.Name);
+        if (checkCategory == null)
+            return await _categoryRepository.AddCategory(newCategory);
+        else
+            throw new ArgumentException($"Category with name {newCategory.Name} already exist");
     }
 
-    public async Task<Recipe> UpdatePhoto(string recipeId, string uri) => await _recipeRepository.UpdatePhoto(recipeId, uri);
+    public async Task<Recipe> UpdatePhoto(string recipeId, string filepath)
+    {
+        var uri = "https://caketime.blob.core.windows.net/recipes/";
+        //TODO: extension
+        var blob = _blobService.CreateBlob($"{recipeId}.jpg", filepath);
+        return await _recipeRepository.UpdatePhoto(recipeId, $"{uri}{recipeId}.jpg");
+    }
 
     public async Task DeleteRecipe(string id) => await _recipeRepository.DeleteRecipe(id);
 
