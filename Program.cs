@@ -84,8 +84,6 @@ app.UseExceptionHandler(c => c.Run(async context =>
 
 //GET
 
-app.MapGet("/", () => "Hello World!");
-app.MapGet("/setup", (IRecipeService recipeService) => recipeService.DummyData());
 app.MapGet("/categories", async (IRecipeService recipeService) =>
 {
 
@@ -110,23 +108,6 @@ app.MapGet("/categories/{name}", async (IRecipeService recipeService, string nam
             return Results.Ok(result);
         else
             return Results.NotFound($"Category {name} not fount");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex);
-        throw;
-    }
-});
-
-app.MapGet("/categories/{id}", async (IRecipeService recipeService, string id) =>
-{
-    try
-    {
-        var result = await recipeService.GetCategoryById(id);
-        if (result != null)
-            return Results.Ok(result);
-        else
-            return Results.NotFound($"Category not fount");
     }
     catch (Exception ex)
     {
@@ -197,7 +178,21 @@ app.MapGet("/instructions/{name}/{manual}", async (IRecipeService recipeService,
     }
 });
 
-app.MapGet("/recipes/recipe/{recipeid}", async (IRecipeService recipeService, string recipeid) =>
+app.MapGet("/recipes", async (IRecipeService recipeService) =>
+{
+    try
+    {
+        var results = await recipeService.GetRecipes();
+        return Results.Ok(results);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapGet("/recipes/{recipeid}", async (IRecipeService recipeService, string recipeid) =>
 {
     try
     {
@@ -214,21 +209,9 @@ app.MapGet("/recipes/recipe/{recipeid}", async (IRecipeService recipeService, st
     }
 });
 
-app.MapGet("/recipes/all", async (IRecipeService recipeService) =>
-{
-    try
-    {
-        var results = await recipeService.GetRecipes();
-        return Results.Ok(results);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex);
-        throw;
-    }
-});
 
-app.MapGet("/recipes/all/{uid}", [Authorize] async (IRecipeService recipeService, string uid) =>
+
+app.MapGet("/recipes/owner/{uid}", [Authorize] async (IRecipeService recipeService, string uid) =>
 {
     try
     {
@@ -304,7 +287,7 @@ app.MapPost("/categories", async (IValidator<Category> validator, IRecipeService
     }
 });
 
-app.MapPost("/recipes/all", [Authorize] async (IValidator<Recipe> validator, IRecipeService recipeService, Recipe recipe) =>
+app.MapPost("/recipes", [Authorize] async (IValidator<Recipe> validator, IRecipeService recipeService, Recipe recipe) =>
 {
     try
     {
@@ -365,7 +348,7 @@ app.MapPost("/signup", async (IValidator<User> validator, IRecipeService recipeS
 
 // PUT
 
-app.MapPut("/recipes/recipe/upload/{recipeid}", [Authorize] async (IRecipeService recipeService, IBlobService blobService, string recipeId) =>
+app.MapPut("/recipes/upload/{recipeid}", [Authorize] async (IRecipeService recipeService, IBlobService blobService, string recipeId) =>
 {
     try
     {
