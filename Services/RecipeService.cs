@@ -6,7 +6,6 @@ public interface IRecipeService
     Task<Instruction> AddInstrucion(Instruction newInstruction);
     Task<Recipe> AddRecipe(Recipe newRecipe);
     Task<Category> AddCategory(Category newCategory);
-    Task DummyData();
     Task<List<Ingredient>> GetIngredients();
     Task<List<Instruction>> GetInstructions();
     Task<List<Recipe>> GetRecipes();
@@ -18,7 +17,6 @@ public interface IRecipeService
 
     Task<List<Recipe>> GetRecipesByOwner(string uid);
     Task<Recipe> GetRecipeById(string id);
-    // Task<Recipe> UpdateFavorite(string recipeid, string uid);
     Task<Recipe> UpdatePhoto(string recipeId, string filepath);
 
     // USER
@@ -29,7 +27,6 @@ public interface IRecipeService
     Task<User> ToggleFavorite(string userUid, Recipe recipe);
     Task<User> AddMyRecipe(string userUid, Recipe recipe);
     Task<User> DeleteMyRecipe(string userUid, Recipe recipe);
-    Task<Category> GetCategoryById(string id);
     Task<Category> UpdateCategory(string id, string name);
 }
 
@@ -51,22 +48,6 @@ public class RecipeService : IRecipeService
         _userRepository = userRepository;
         _blobService = blobService;
     }
-    public async Task DummyData()
-    {
-        try
-        {
-            if (!(await _ingredientRepository.GetIngredients()).Any())
-                await _ingredientRepository.AddIngredients(new List<Ingredient>() { new Ingredient() { Name = "Flour", Quantity = "120g" }, new Ingredient() { Name = "Egg", Quantity = "2" } });
-            if (!(await _instructionRepository.GetInstructions()).Any())
-                await _instructionRepository.AddInstructions(new List<Instruction>() { new Instruction() { Name = "Step 1", Manual = "Put Flour in the bowl" } });
-
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            throw;
-        }
-    }
 
     public async Task<List<Ingredient>> GetIngredients() => await _ingredientRepository.GetIngredients();
 
@@ -85,8 +66,6 @@ public class RecipeService : IRecipeService
     public async Task<List<Category>> GetCategories() => await _categoryRepository.GetCategories();
 
     public async Task<Category> GetCategoryByName(string name) => await _categoryRepository.GetCategoryByName(name);
-    public async Task<Category> GetCategoryById(string id) => await _categoryRepository.GetCategoryById(id);
-
     public async Task<Category> UpdateCategory(string id, string name)
     {
         var checkCategory = await _categoryRepository.GetCategoryByName(name);
@@ -117,6 +96,7 @@ public class RecipeService : IRecipeService
         }
         else
         {
+
             newRecipe.Category = category;
             for (int i = 0; i < newRecipe.Ingredients.Count(); i++)
             {

@@ -3,6 +3,7 @@ namespace Caketime.GraphQL.Mutations;
 public interface IMutations
 {
     Task<AddCategoryPayload> AddCategory([Service(ServiceKind.Default)] IValidator<AddCategoryInput> validator, [Service(ServiceKind.Default)] IRecipeService recipeService, AddCategoryInput input);
+    Task<UpdateCategoryPayload> UpdateCategoryName([Service(ServiceKind.Default)] IRecipeService recipeService, UpdateCategoryInput input);
 }
 
 public class Mutations : IMutations

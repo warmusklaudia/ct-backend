@@ -16,8 +16,10 @@ builder.Services.AddTransient<IInstructionRepository, InstructionRepository>();
 builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 //Services
 builder.Services.AddTransient<IRecipeService, RecipeService>();
+builder.Services.AddTransient<IProductService, ProductService>();
 //Validation
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<RecipeValidator>());
 builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryValidator>());
@@ -84,6 +86,38 @@ app.UseExceptionHandler(c => c.Run(async context =>
 
 //GET
 
+app.MapGet("/products", async (IProductService service) =>
+{
+
+    try
+    {
+        var results = await service.GetProducts();
+        return Results.Ok(results);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapGet("/products/{id}", async (IProductService service, string id) =>
+{
+    try
+    {
+        var result = await service.GetProductById(id);
+        if (result != null)
+            return Results.Ok(result);
+        else
+            return Results.NotFound($"Product not found");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
 app.MapGet("/categories", async (IRecipeService recipeService) =>
 {
 
@@ -107,7 +141,7 @@ app.MapGet("/categories/{name}", async (IRecipeService recipeService, string nam
         if (result != null)
             return Results.Ok(result);
         else
-            return Results.NotFound($"Category {name} not fount");
+            return Results.NotFound($"Category {name} not found");
     }
     catch (Exception ex)
     {
@@ -243,13 +277,30 @@ app.MapGet("/users", [Authorize] async (IRecipeService recipeService) =>
     }
 });
 
-app.MapGet("/users/{uid}", [Authorize] async (IMapper mapper, IRecipeService recipeService, string uid) =>
+app.MapGet("/users/favorite/{uid}", [Authorize] async (IMapper mapper, IRecipeService recipeService, string uid) =>
 {
     try
     {
         var results = await recipeService.GetUserByUID(uid);
         if (results != null)
             return Results.Ok(mapper.Map<UserDTO>(results));
+        else
+            return Results.NotFound("User not found");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
+app.MapGet("/users/my/{uid}", [Authorize] async (IMapper mapper, IRecipeService recipeService, string uid) =>
+{
+    try
+    {
+        var results = await recipeService.GetUserByUID(uid);
+        if (results != null)
+            return Results.Ok(mapper.Map<UserMyDTO>(results));
         else
             return Results.NotFound("User not found");
     }
@@ -287,6 +338,21 @@ app.MapPost("/categories", async (IValidator<Category> validator, IRecipeService
     }
 });
 
+app.MapPost("/products", async (IProductService service, Product product) =>
+{
+    try
+    {
+        var result = await service.AddProduct(product);
+        return Results.Created($"/products/{result.Id}", result);
+
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex);
+        throw;
+    }
+});
+
 app.MapPost("/recipes", [Authorize] async (IValidator<Recipe> validator, IRecipeService recipeService, Recipe recipe) =>
 {
     try
@@ -294,6 +360,7 @@ app.MapPost("/recipes", [Authorize] async (IValidator<Recipe> validator, IRecipe
         var validationResult = validator.Validate(recipe);
         if (validationResult.IsValid)
         {
+            recipe.Img = "https://caketime.blob.core.windows.net/recipes/default.jpg";
             var result = await recipeService.AddRecipe(recipe);
             return Results.Created($"/recipes/{result.RecipeId}", result);
         }
@@ -318,18 +385,19 @@ app.MapPost("/signup", async (IValidator<User> validator, IRecipeService recipeS
         var validationResult = validator.Validate(user);
         if (validationResult.IsValid)
         {
-            UserRecordArgs args = new()
-            {
-                Email = user.Email,
-                EmailVerified = false,
-                Password = user.Password,
-                DisplayName = user.DisplayName,
-                Disabled = false,
-            };
+            // UserRecordArgs args = new()
+            // {
+            //     Email = user.Email,
+            //     EmailVerified = false,
+            //     Password = user.Password,
+            //     DisplayName = user.DisplayName,
+            //     Disabled = false,
+            // };
 
-            var createdUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(args);
-            var uid = createdUser.Uid;
-            user.UID = uid;
+            // var createdUser = await FirebaseAuth.DefaultInstance.CreateUserAsync(args);
+            // var uid = createdUser.Uid;
+            // if (uid != null)
+            //     user.UID = uid;
             var result = await recipeService.AddUser(user);
             return Results.Created($"/users/{result.UID}", result);
         }
@@ -352,7 +420,7 @@ app.MapPut("/recipes/upload/{recipeid}", [Authorize] async (IRecipeService recip
 {
     try
     {
-        var filepath = "./assets/Pavlova.jpg";
+        var filepath = "./assets/ChocolateMuffins.JPG";
         var result = await recipeService.UpdatePhoto(recipeId, filepath);
         return Results.Ok(result);
     }
@@ -381,6 +449,7 @@ app.MapPut("/users/{uid}/recipes/myrecipes/add", [Authorize] async (IRecipeServi
 {
     try
     {
+        recipe.Img = "https://caketime.blob.core.windows.net/recipes/default.jpg";
         var result = await recipeService.AddMyRecipe(uid, recipe);
         return Results.Ok(result);
     }
@@ -423,6 +492,6 @@ app.MapDelete("/recipes/{id}", [Authorize] async (IRecipeService recipeService, 
     }
 });
 
-app.Run("http://localhost:3000");
+app.Run("http://0.0.0.0:3000");
 // app.Run();
 // public partial class Program { }
